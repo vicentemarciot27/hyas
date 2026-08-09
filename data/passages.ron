@@ -1,0 +1,17 @@
+(
+    id: "player_death",
+    messages: [
+        (
+            id: "judgment",
+            text: "A cold shiver crawls down your spine as darkness closes in. Flesh, ambition, and memory fade alike, reduced at last to ash. Every dream you carried loses its meaning before the silence of the afterlife. There is nothing left now but to face your particular judgment.",
+        ),
+        (
+            id: "cadet",
+            text: "Your orders end here, Cadet. The world will continue without your answer, your ambitions unfinished and your questions unresolved. Whatever comes next, you face it alone.",
+        ),
+        (
+            id: "it_hurts",
+            text: "It... hurts...   ...   ..  .             .              ",
+        ),
+    ],
+),
