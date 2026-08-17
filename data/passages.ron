@@ -1,3 +1,4 @@
+[
 (
     act: 0,
     location: "any",
@@ -23,7 +24,7 @@
     id: "introductory_text",
     messages: [
         (
-            id: "introduction"
+            id: "introduction",
             text: "In 2010, the world tore open. 
             
             Rifts opened across Earth and unseen creatures emerged from Tartarus.
@@ -64,7 +65,8 @@
             He never came back.
 
             It is the year 2053, and today, Cadet, you volunteered to become a Lenhador.
-            "
+            ",
         )
     ]
 )
+]
