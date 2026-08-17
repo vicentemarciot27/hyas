@@ -1,4 +1,6 @@
 (
+    act: 0,
+    location: "any",
     id: "player_death",
     messages: [
         (
@@ -15,3 +17,54 @@
         ),
     ],
 ),
+(
+    act: 1,
+    location: "start",
+    id: "introductory_text",
+    messages: [
+        (
+            id: "introduction"
+            text: "In 2010, the world tore open. 
+            
+            Rifts opened across Earth and unseen creatures emerged from Tartarus.
+
+            In the span of 3 years, some regions were effectively lost:
+            Siberia,
+            parts of Northern Canada
+            Lake Chad,
+            Bosnia,
+            Baluchistan,
+            and the worst humanitarian catastrophe of the new age - the island of Java.
+
+            The damage went far beyond the land that was lost. Governments collapsed, borders moved, and wars that had lasted generations ended overnight only for new ones to begin. 
+            
+            Across much of the world, emergency powers became permanent and tyrannical regimes arose as frightened populations learned to accept the new reality. 
+            
+            Only scattered pockets of freedom and democracy remained, places where fragments of the old order were still preserved.
+
+            Brazil survived the first great rift in the Amazon. Its soldiers fought until they had reclaimed enough ground to build a wall and contain what remained beyond it. 
+            
+            From that war came the Lenhadores - soldiers remade into something stronger than the men they had once been.
+
+            The rifts also brought something humanity had never seen before: a strange mineral found where the world had been wounded. It was precious, dangerous, and, against the creatures of Tartarus, indispensable.
+
+            Then came the second rift, six times larger.
+
+            It consumed much of the Paraíba Valley and drove millions toward the coast and São Paulo. City after city was evacuated as the defensive line collapsed westward.
+
+            The wall was finally set at Guarulhos and for a time, São Paulo stood almost empty beneath the shadow of the Second Wall.
+
+            The nation survived, but the Republic that had entered 2010 did not. In the decades that followed, Brazil rebuilt itself around the walls, the Lenhadores, and the resources drawn from the wounds left by the rifts.
+
+            Forty-three years later, the walls still stand, smaller rifts still open, and the Lenhadores still guard what lies beyond them.
+
+            Brazil is now an Empire.
+
+            Ten years ago, your father, one of those soldiers himself, crossed one of those walls.
+            He never came back.
+
+            It is the year 2053, and today, Cadet, you volunteered to become a Lenhador.
+            "
+        )
+    ]
+)
