@@ -1,6 +1,19 @@
+#![enable(implicit_some)]
+
+// CHECKS
+//
+// Two scales, two conditions. Do not merge them.
+//
+//   AttributeAtLeast(attribute: Perception, value: 2)   // 0-5
+//   SkillAtLeast(skill: Empathy, value: 20)             // 0-100
+//
+// Attributes: Perception, Memory, Reasoning, Will, Physique, Agility.
+// Everything else in the ledger is a skill.
+
 [
 (
     act: 0,
+    sub: 0,
     location: "any",
     id: "player_death",
     messages: [
@@ -17,16 +30,19 @@
             text: "It... hurts...   ...   ..  .             .              ",
         ),
     ],
+    next: None,
 ),
+
 (
     act: 1,
+    sub: 1,
     location: "start",
-    id: "introductory_text",
+    id: "act1_001.introductory_text",
     messages: [
         (
-            id: "introduction",
-            text: "In 2010, the world tore open. 
-            
+            speaker: None,
+            text: "In 2010, the world tore open.
+
             Rifts opened across Earth and unseen creatures emerged from Tartarus.
 
             In the span of 3 years, some regions were effectively lost:
@@ -37,14 +53,14 @@
             Baluchistan,
             and the worst humanitarian catastrophe of the new age - the island of Java.
 
-            The damage went far beyond the land that was lost. Governments collapsed, borders moved, and wars that had lasted generations ended overnight only for new ones to begin. 
-            
-            Across much of the world, emergency powers became permanent and tyrannical regimes arose as frightened populations learned to accept the new reality. 
-            
+            The damage went far beyond the land that was lost. Governments collapsed, borders moved, and wars that had lasted generations ended overnight only for new ones to begin.
+
+            Across much of the world, emergency powers became permanent and tyrannical regimes arose as frightened populations learned to accept the new reality.
+
             Only scattered pockets of freedom and democracy remained, places where fragments of the old order were still preserved.
 
-            Brazil survived the first great rift in the Amazon. Its soldiers fought until they had reclaimed enough ground to build a wall and contain what remained beyond it. 
-            
+            Brazil survived the first great rift in the Amazon. Its soldiers fought until they had reclaimed enough ground to build a wall and contain what remained beyond it.
+
             From that war came the Lenhadores - soldiers remade into something stronger than the men they had once been.
 
             The rifts also brought something humanity had never seen before: a strange mineral found where the world had been wounded. It was precious, dangerous, and, against the creatures of Tartarus, indispensable.
@@ -66,7 +82,2230 @@
 
             It is the year 2053, and today, Cadet, you volunteered to become a Lenhador.
             ",
-        )
-    ]
-)
+        ),
+    ],
+    next: Some("act1_002.arrival"),
+),
+
+// ENLISTMENT LINE
+
+(
+    act: 1,
+    sub: 2,
+    location: "enlistment_line",
+    id: "act1_002.arrival",
+    messages: [
+        (
+            speaker: None,
+            text: "Goiânia, July 6th 2053
+            It's winter. Though in the midwest there are only two seasons: hot and dry (winter and autumn), and hot and wet (summer and spring). You feel your throat dry up under the sun while the shade of a cloud is the only comfort.
+
+            Ahead of you is a long intake line. Everyone is holding documents or keeping them close, each with their respective suitcase holding minimal clothes. All waiting for the moment they will be asked for them. With varying degrees of preparation, nervousness and anticipation. Some brought food: box juice, cereal bars. Others didn't even bring a water bottle or a cap to protect from the sun.
+
+            White T-shirts, white sneakers, blue jeans. The standard cotton swab loadout, as it's called in the armed forces. Some candidates already shaved their heads; others clearly held onto their hair until the last possible day.
+
+            A few eventually sit on the floor. The line moves so slowly that standing for three or four hours accomplishes nothing.
+
+            A slightly uneasy candidate stands nearby. Looking like a cotton swab, like everyone else, though his brown quill hairstyle stands out and, in a way, denounces his partial commitment to letting go of his past life. He's white, yellowish-green eyes, perhaps of southern or uruguayan descent. You heard that uruguayans born past 2030 are able to become Lenhadores. He holds a thick, transparent folder containing forms, documents and medical exams.
+
+            You begin to feel your legs a bit tired from all the waiting.
+            ",
+        ),
+
+        (
+            speaker: None,
+            text: r#"
+                The line advances another few meters, then stops again.
+            "#,
+        ),
+
+        (
+            speaker: None,
+            text: r#"
+                Every candidate ahead of you is holding some subset of the same documents.
+
+                The important-looking ones are easy to recognize.
+
+                IMPERIAL ARMY - VOLUNTARY ENLISTMENT - FORM 3-B
+                IMPERIAL LENHADOR CORPS - VOLUNTARY ENLISTMENT - FORM 33-A
+                CADET ADMISSION AND INCORPORATION DECLARATION - FORM 3-C
+                DECLARATION OF INTENT TO ENTER ACTIVE IMPERIAL SERVICE - FORM 3-D
+                DECLARATION OF PRIOR MILITARY SERVICE - FORM 6-A
+                DECLARATION OF CIVIL AND DEPENDENT STATUS - FORM 8-C
+                AUTHORIZATION FOR BACKGROUND AND SERVICE RECORD REVIEW - FORM 11-F
+
+                Then come the documents proving that you are, in fact, yourself.
+
+                NATIONAL ID OF THE EMPIRE OF BRAZIL
+                Individual Taxpayer Registry Certificate
+                Birth Certificate
+                Certificate of Imperial Citizenship
+                Certificate of Registered Domicile
+                Proof of Current Residence
+
+                Then the documents proving that you went to school.
+
+                Secondary School Completion Certificate
+                Secondary School Academic Transcript
+
+                Then the documents proving that, as far as several different offices are concerned, you have not done anything that would prevent you from being here.
+
+                Certificate of Civic Regularity
+                Certificate of Military Service Status
+                Certificate of Discharge or Reservist Status
+                Imperial Military Justice - Negative Record Certificate
+                Provincial Civil Justice - Negative Record Certificate
+                Declaration of Moral Suitability for Imperial Service
+
+                And then there is the medical file.
+
+                PERSONAL AND FAMILY MEDICAL HISTORY - FORM MED-1
+                DECLARATION OF FITNESS FOR MILITARY TRAINING — FORM MED-2
+                Vaccination Record
+                Complete Blood Count
+                Blood Type and Rh Factor
+                Coagulation Profile
+                Fasting Blood Glucose
+                Urea and Creatinine
+                Hepatic Function Panel
+                Urinalysis
+                Stool Parasitology
+                Syphilis Serology
+                HIV Serology
+                Hepatitis B Serology
+                Hepatitis C Serology
+                Toxicological Screening
+                Chest Radiographs - PA and lateral
+                Cervical, Thoracic and Lumbar Spine Radiographs
+                Resting Electrocardiogram
+                Exercise Stress Test
+                Pure-Tone and Speech Audiometry
+                Complete Ophthalmological Examination
+
+                That would already be enough paperwork for most branches of the Army.
+
+                You volunteered for the Lenhadores.
+
+                LENHADOR CANDIDATE MEDICAL DISCLOSURE - FORM 33-B
+                GENETIC COMPATIBILITY CERTIFICATE - LC-GEN/4
+                METAMORPHIC COMPATIBILITY PANEL - LC-MCP/2
+                BASELINE NEUROCOGNITIVE ASSESSMENT - LC-NC/7
+                MINERAL SENSITIVITY AND REACTIVITY ASSAY - LC-MR/3
+                DECLARATION OF PRIOR ABYSSAL EXPOSURE - FORM 33-E
+                CONTAMINATION AND ANOMALOUS EXPOSURE SCREENING CERTIFICATE - LC-AE/5
+                DECLARATION OF PRIOR USE OF CONTROLLED METAMORPHIC AGENTS - FORM 33-F
+
+                And, finally, some medical forms.
+
+                INFORMED CONSENT FOR METAMORPHIC INDUCTION - FORM 33-C
+                ACKNOWLEDGEMENT OF IRREVERSIBLE PHYSIOLOGICAL ALTERATION - FORM 33-C/II
+                ACKNOWLEDGEMENT OF LONG-TERM MEDICAL MONITORING REQUIREMENTS - FORM 33-C/IV
+                AUTHORIZATION FOR RETENTION OF BIOLOGICAL SAMPLES - FORM 33-G
+                DESIGNATION OF NEXT OF KIN - FORM 33-H
+                DESIGNATION FOR RELEASE OF PERSONAL EFFECTS - FORM 33-H/II
+                DECLARATION CONCERNING RECOVERY AND DISPOSITION OF REMAINS - FORM 33-H/III
+
+                Getting all of it here was an ordeal in itself, and quite expensive. You only had a month to gather all.
+
+                Most candidates did not bother keeping the entire stack in their hands. Documents they were reasonably sure nobody would ask for remained inside their suitcases.
+
+                Reasonably sure.
+
+                Every few minutes, someone farther ahead in the line starts digging frantically through a bag.
+            "#,
+        ),
+
+        (
+            speaker: None,
+            text: r#"
+                Six candidates cleared the desk in the last twenty minutes.
+
+                There are forty-odd ahead of you.
+
+                The line doesn't advance continuously. It stalls for long
+                stretches, then compresses four or five people at once.
+            "#,
+
+            when: [
+                AttributeAtLeast(
+                    attribute: Reasoning,
+                    value: 2,
+                ),
+            ],
+        ),
+    ],
+
+    choices: [
+        (
+            id: "sit",
+            text: "<Sit down.>",
+
+            effects: [
+                SetFlag(CadetSatInLine),
+            ],
+
+            next: "act1_002.line_settles",
+        ),
+
+        (
+            id: "stand",
+            text: "<Stay standing.>",
+
+            next: "act1_002.line_settles",
+        ),
+
+        (
+            id: "reasoning_tell_tomas",
+            text: "\"It stalls, then it jumps. Sit through the stalls, stand when it compresses. We will manage to keep our place this way.\"",
+
+            when: [
+                AttributeAtLeast(
+                    attribute: Reasoning,
+                    value: 2,
+                ),
+            ],
+
+            effects: [
+                SetFlag(CadetGaveTomasPracticalAdvice),
+            ],
+
+            next: "act1_002.line_advice",
+        ),
+    ],
+
+    next: None,
+),
+
+(
+    act: 1,
+    sub: 2,
+    location: "enlistment_line",
+    id: "act1_002.line_settles",
+    messages: [
+        (
+            speaker: None,
+            text: r#"
+                You sit against the wall with the others.
+            "#,
+
+            when: [
+                Flag(CadetSatInLine),
+            ],
+        ),
+
+        (
+            speaker: None,
+            text: r#"
+                You stay on your feet.
+
+                It doesn't make the line move any faster.
+            "#,
+
+            when: [
+                Not(
+                    Flag(CadetSatInLine),
+                ),
+            ],
+        ),
+    ],
+
+    next: Some("act1_002.signature"),
+),
+
+(
+    act: 1,
+    sub: 2,
+    location: "enlistment_line",
+    id: "act1_002.line_advice",
+    messages: [
+        (
+            speaker: Some("Candidate"),
+            text: "\"You've been timing them?\"",
+        ),
+
+        (
+            speaker: None,
+            text: r#"
+                He looks toward the front of the line, does some arithmetic
+                of his own, then lowers himself against the wall without
+                letting go of his folder.
+            "#,
+        ),
+
+        (
+            speaker: Some("Candidate"),
+            text: "\"Wake me up when the Empire needs my papers.\"",
+        ),
+    ],
+
+    next: Some("act1_002.signature"),
+),
+
+// ── The signature ───────────────────────────────────────────
+
+(
+    act: 1,
+    sub: 2,
+    location: "enlistment_line",
+    id: "act1_002.signature",
+    messages: [
+        (
+            speaker: None,
+            text: r#"
+                At the front of the slow-moving line, a kid seems to be in
+                trouble. He's shaking.
+
+                The recruiter handling him isn't much older. Camouflage fatigues,
+                sleeves rolled up against the heat, a cheap fan rattling beside
+                the desk.
+
+                Behind him, taped to the wall at an angle nobody has bothered to
+                correct, a laminated portrait of the Emperor has gone pale green
+                in the sun.
+            "#,
+        ),
+
+        (
+            speaker: Some("Recruiter"),
+            text: "\"The signature looks different from the one in your ID.\"",
+        ),
+
+        (
+            speaker: Some("Nervous Candidate"),
+            text: "\"Sorry. Please, just let it pass. I signed it fast. Look at the photo. It's me.\"",
+        ),
+
+        (
+            speaker: Some("Recruiter"),
+            text: "\"Should've signed it slower. Go to the end of the line. We'll decide what to do with you when this is over.\"",
+        ),
+
+        // Exactly one of the three reads fires. Each one carries a different
+        // part of the picture rather than repeating the same conclusion.
+
+        (
+            speaker: None,
+            text: r#"
+                He isn't angry with the kid.
+
+                He's enjoying how nervous he is, and the way every objection
+                immediately turns into an apology.
+            "#,
+
+            when: [
+                SkillAtLeast(
+                    skill: Empathy,
+                    value: 20,
+                ),
+                Not(
+                    SkillAtLeast(
+                        skill: MilitaryAffairs,
+                        value: 20,
+                    ),
+                ),
+                Not(
+                    AttributeAtLeast(
+                        attribute: Reasoning,
+                        value: 3,
+                    ),
+                ),
+            ],
+        ),
+
+        (
+            speaker: None,
+            text: r#"
+                He doesn't mark the form, separate it from the others, or look
+                at the ID again before waving the kid away.
+
+                This isn't cadre making an enlistment decision. He's a recent
+                recruit on intake duty, bottom of the food chain. Once you are
+                sworn in you will outrank him.
+
+                If the signature were grounds for rejecting a candidate, someone
+                with real authority would have to be called.
+
+                He hasn't called anyone.
+            "#,
+
+            when: [
+                SkillAtLeast(
+                    skill: MilitaryAffairs,
+                    value: 20,
+                ),
+                Not(
+                    AttributeAtLeast(
+                        attribute: Reasoning,
+                        value: 3,
+                    ),
+                ),
+            ],
+
+            effects: [
+                SetFlag(CadetReadRecruiterCorrectly),
+            ],
+        ),
+
+        (
+            speaker: None,
+            text: r#"
+                Sending him to the back of the line instead of escalating it
+                tells you the recruiter doesn't intend to make much of this.
+
+                Once everyone else is processed, turning it into a real problem
+                means finding a superior, explaining it, and creating work for
+                himself.
+
+                Stamping the form will be easier.
+            "#,
+
+            when: [
+                AttributeAtLeast(
+                    attribute: Reasoning,
+                    value: 3,
+                ),
+            ],
+
+            effects: [
+                SetFlag(CadetReadRecruiterCorrectly),
+            ],
+        ),
+
+        (
+            speaker: None,
+            text: r#"
+                The kid walks past the line without looking at anyone. The next
+                candidate is already putting his papers on the desk.
+
+                After a few minutes, once everything is stamped, the recruiter pulls a laminated card from under the desk and reads off it without looking down.
+            "#,
+        ),
+
+        (
+            speaker: Some("Recruiter"),
+            text: "\"Do you enter this service of your own will, owing loyalty to the Empire before family, faith and self.\"",
+        ),
+
+        (
+            speaker: None,
+            text: r#"
+                It clearly isn't a question. The candidate's face becomes serious as he says yes.
+
+                Stamp. Next.
+            "#,
+        ),
+
+        (
+            speaker: None,
+            text: "The candidate next to you feels compelled to speak.",
+        ),
+
+        (
+            speaker: Some("Candidate"),
+            text: "\"Lost half the day because he couldn't sign his own name. The Empire doesn't need clumsy soldiers who can't even follow the public notice properly.\"",
+        ),
+
+        (
+            speaker: Some("Candidate"),
+            text: "\"At least that's one less ahead of us.\"",
+        ),
+
+        (
+            speaker: Some("Candidate"),
+            text: "\"...That sounded meaner out loud.\"",
+        ),
+    ],
+
+    choices: [
+        (
+            id: "agree",
+            text: "\"You're not wrong.\"",
+
+            effects: [
+                SetTomasFirstImpression(Warm),
+            ],
+
+            next: "act1_002.signature_agree",
+        ),
+
+        (
+            id: "callout",
+            text: "\"You enjoyed saying that.\"",
+
+            effects: [
+                SetTomasFirstImpression(Teasing),
+            ],
+
+            next: "act1_002.signature_callout",
+        ),
+
+        (
+            id: "confront",
+            text: "\"Could've happened to you.\"",
+
+            effects: [
+                SetFlag(CadetChallengedTomas),
+                SetTomasFirstImpression(Blunt),
+            ],
+
+            next: "act1_002.signature_confront",
+        ),
+
+        (
+            id: "vulnerable",
+            text: "\"Could've happened to me.\"",
+
+            effects: [
+                SetFlag(CadetSharedVulnerabilityWithTomas),
+                SetTomasFirstImpression(Warm),
+            ],
+
+            next: "act1_002.signature_vulnerable",
+        ),
+        (
+            id: "authority",
+            text: "\"It's clearly the same guy. They have his picture. They're just being assholes.\"",
+
+            when: [
+                Not(
+                    Flag(CadetReadRecruiterCorrectly),
+                ),
+            ],
+
+            effects: [
+                SetFlag(CadetOpenlyQuestionedAuthority),
+                SetTomasFirstImpression(Blunt),
+            ],
+
+            next: "act1_002.signature_authority",
+        ),
+
+        (
+            id: "authority_read",
+            text: "\"He'll let him through. He just wants to make him wait. Anyone with power, even small, enjoys playing with it.\"",
+
+            when: [
+                Flag(CadetReadRecruiterCorrectly),
+            ],
+
+            effects: [
+                SetFlag(CadetOpenlyQuestionedAuthority),
+                SetFlag(CadetPredictedRecruiterOutcome),
+                SetTomasFirstImpression(Blunt),
+            ],
+
+            next: "act1_002.signature_prediction",
+        ),
+
+        (
+            id: "silent",
+            text: "<Say nothing.>",
+
+            effects: [
+                SetTomasFirstImpression(Distant),
+            ],
+
+            next: "act1_002.signature_silent",
+        ),
+    ],
+
+    next: None,
+),
+
+(
+    act: 1,
+    sub: 2,
+    location: "enlistment_line",
+    id: "act1_002.signature_agree",
+    messages: [
+        (
+            speaker: None,
+            text: r#"
+                He seems relieved that somebody let it pass.
+            "#,
+        ),
+
+        (
+            speaker: Some("Candidate"),
+            text: "\"Right? It's a long day. You get mean.\"",
+        ),
+
+        (
+            speaker: None,
+            text: r#"
+                He goes back to watching the desk.
+            "#,
+        ),
+    ],
+
+    next: Some("act1_002.tomas_turn"),
+),
+
+(
+    act: 1,
+    sub: 2,
+    location: "enlistment_line",
+    id: "act1_002.signature_callout",
+    messages: [
+        (
+            speaker: Some("Candidate"),
+            text: "\"...Yeah. A little.\"",
+        ),
+
+        (
+            speaker: None,
+            text: r#"
+                He doesn't argue with it. He looks toward the front of the line
+                for a while.
+            "#,
+        ),
+
+        (
+            speaker: Some("Candidate"),
+            text: "\"Long day.\"",
+        ),
+    ],
+
+    next: Some("act1_002.tomas_turn"),
+),
+
+(
+    act: 1,
+    sub: 2,
+    location: "enlistment_line",
+    id: "act1_002.signature_confront",
+    messages: [
+                (
+            speaker: None,
+            text: r#"
+                The joke dies in his mouth.
+            "#,
+        ),
+        (
+            speaker: Some("Candidate"),
+            text: "\"It couldn't, really. I checked mine four times.\"",
+        ),
+
+        (
+            speaker: None,
+            text: r#"
+                He tightens his grip on the folder as he says it, which
+                undermines the point a bit.
+            "#,
+        ),
+    ],
+
+    next: Some("act1_002.tomas_turn"),
+),
+
+(
+    act: 1,
+    sub: 2,
+    location: "enlistment_line",
+    id: "act1_002.signature_vulnerable",
+    messages: [
+        (
+            speaker: None,
+            text: r#"
+                He looks at you properly for the first time.
+            "#,
+        ),
+
+        (
+            speaker: Some("Candidate"),
+            text: "\"Could've happened to anyone, you mean.\"",
+        ),
+
+        (
+            speaker: None,
+            text: r#"
+                He thinks about it.
+            "#,
+        ),
+
+        (
+            speaker: Some("Candidate"),
+            text: "\"Yeah. That's the part that gets me. It isn't about being good enough. It's whoever's behind the desk.\"",
+        ),
+    ],
+
+    next: Some("act1_002.tomas_turn"),
+),
+
+(
+    act: 1,
+    sub: 2,
+    location: "enlistment_line",
+    id: "act1_002.signature_authority",
+    messages: [
+        (
+            speaker: Some("Candidate"),
+            text: "\"Keep your voice down.\"",
+        ),
+
+        (
+            speaker: None,
+            text: r#"
+                He looks at the desk. Then at the portrait behind it.
+            "#,
+        ),
+
+        (
+            speaker: Some("Candidate"),
+            text: "\"You're not wrong. And they're the ones holding your paperwork.\"",
+        ),
+    ],
+
+    next: Some("act1_002.tomas_turn"),
+),
+
+(
+    act: 1,
+    sub: 2,
+    location: "enlistment_line",
+    id: "act1_002.signature_prediction",
+    messages: [
+        (
+            speaker: Some("Candidate"),
+            text: "\"Keep your voice down.\"",
+        ),
+
+        (
+            speaker: None,
+            text: r#"
+                He looks at the desk anyway.
+            "#,
+        ),
+
+        (
+            speaker: Some("Candidate"),
+            text: "\"We'll see.\"",
+        ),
+    ],
+
+    next: Some("act1_002.tomas_turn"),
+),
+
+(
+    act: 1,
+    sub: 2,
+    location: "enlistment_line",
+    id: "act1_002.signature_silent",
+    messages: [
+        (
+            speaker: None,
+            text: r#"
+                You don't give him anything.
+
+                He waits a few seconds, then pretends he was talking to himself.
+            "#,
+        ),
+    ],
+
+    next: Some("act1_002.tomas_turn"),
+),
+
+// Tomas at the desk
+
+(
+    act: 1,
+    sub: 2,
+    location: "enlistment_line",
+    id: "act1_002.tomas_turn",
+    messages: [
+        (
+            speaker: None,
+            text: r#"
+                The candidate beside you reaches the desk eventually.
+
+                His preparation borders on absurd.
+
+                Forms. Copies. Medical exams. Identification. Copies of the
+                identification. Copies of documents that probably didn't
+                need copies.
+
+                Everything is arranged inside a thick transparent folder.
+
+                He still looks nervous.
+            "#,
+        ),
+
+        (
+            speaker: Some("Recruiter"),
+            text: "\"Fitness declaration.\"",
+        ),
+
+        (
+            speaker: None,
+            text: r#"
+                The candidate reacts immediately.
+
+                Too immediately.
+
+                He pulls out a sheet and hands it over.
+            "#,
+        ),
+
+        (
+            speaker: Some("Recruiter"),
+            text: "\"That's not what I asked for.\"",
+        ),
+
+        (
+            speaker: None,
+            text: r#"
+                He takes the paper back.
+
+                Now one hand is holding the folder, another is holding the
+                rejected sheet, and somehow he needs a third to search
+                through everything else.
+
+                The neat stack begins to collapse.
+
+                Behind him, forty people are watching him fail at something he
+                prepared days for. It's the overpreparation that's the most humiliating.
+            "#,
+        ),
+
+        (
+            speaker: None,
+            text: r#"
+                The fitness declaration is visible about halfway through the
+                stack. Its header is printed in a different typeface from the
+                medical forms around it.
+            "#,
+
+            when: [
+                AttributeAtLeast(
+                    attribute: Perception,
+                    value: 3,
+                ),
+            ],
+        ),
+
+        (
+            speaker: None,
+            text: r#"
+                You remember seeing him reorganize the folder earlier.
+
+                He put the fitness declaration immediately beneath the
+                X-ray paperwork.
+            "#,
+
+            when: [
+                AttributeAtLeast(
+                    attribute: Memory,
+                    value: 3,
+                ),
+            ],
+        ),
+    ],
+
+    choices: [
+        (
+            id: "perception_help",
+            text: "<Whisper> \"Under the white form.\"",
+
+            when: [
+                AttributeAtLeast(
+                    attribute: Perception,
+                    value: 2,
+                ),
+            ],
+
+            effects: [
+                SetFlag(CadetHelpedTomasAtIntake),
+                SetFlag(TomasNoticedCadetObservant),
+            ],
+
+            next: "act1_002.tomas_discreet_help",
+        ),
+
+        (
+            id: "memory_help",
+            text: "<Whisper> \"You put it under the X-ray.\"",
+
+            when: [
+                AttributeAtLeast(
+                    attribute: Memory,
+                    value: 2,
+                ),
+            ],
+
+            effects: [
+                SetFlag(CadetHelpedTomasAtIntake),
+                SetFlag(TomasNoticedCadetMemory),
+            ],
+
+            next: "act1_002.tomas_discreet_help",
+        ),
+
+        (
+            id: "help_search",
+            text: "<Help him search through the documents.>",
+
+            when: [
+                Not(
+                    AttributeAtLeast(
+                        attribute: Agility,
+                        value: 2,
+                    ),
+                ),
+            ],
+
+            effects: [
+                SetFlag(CadetHelpedTomasAtIntake),
+            ],
+
+            next: "act1_002.tomas_help_search",
+        ),
+
+        (
+            id: "help_search_agility",
+            text: "<Steady the stack and pull the declaration free.>",
+
+            when: [
+                AttributeAtLeast(
+                    attribute: Agility,
+                    value: 2,
+                ),
+            ],
+
+            effects: [
+                SetFlag(CadetHelpedTomasAtIntake),
+                SetFlag(TomasNoticedCadetQuickHands),
+            ],
+
+            next: "act1_002.tomas_help_agility",
+        ),
+
+        (
+            id: "help_deception",
+            text: "<Lie> \"The major said the fitness declaration goes in tomorrow, at the first PT exam. Have you been stamping them all morning without need?\"",
+
+            when: [
+                SkillAtLeast(
+                    skill: Deception,
+                    value: 30,
+                ),
+            ],
+
+            effects: [
+                SetFlag(CadetHelpedTomasAtIntake),
+                SetFlag(TomasNoticedCadetDeceptive),
+            ],
+
+            next: "act1_002.tomas_help_deception",
+        ),
+
+        (
+            id: "public_defense",
+            text: "\"He's got it. Give him a second.\"",
+
+            effects: [
+                SetFlag(CadetHelpedTomasAtIntake),
+                SetFlag(CadetPubliclyDefendedTomas),
+            ],
+
+            next: "act1_002.tomas_public_defense",
+        ),
+
+        (
+            id: "one_less",
+            text: "\"Tick-tock. Careful or it'll be one less.\"",
+
+            effects: [
+                SetFlag(CadetThrewOneLessBackAtTomas),
+            ],
+
+            next: "act1_002.tomas_one_less",
+        ),
+
+        (
+            id: "do_nothing",
+            text: "<Do nothing.>",
+
+            next: "act1_002.tomas_finds_it",
+        ),
+    ],
+
+    next: None,
+),
+
+(
+    act: 1,
+    sub: 2,
+    location: "enlistment_line",
+    id: "act1_002.tomas_finds_it",
+    messages: [
+        (
+            speaker: None,
+            text: r#"
+                He almost drops the entire folder before finding the form
+                himself.
+
+                The recruiter takes it without comment.
+            "#,
+        ),
+    ],
+
+    next: Some("act1_002.after_tomas_turn"),
+),
+
+(
+    act: 1,
+    sub: 2,
+    location: "enlistment_line",
+    id: "act1_002.tomas_one_less",
+    messages: [
+        (
+            speaker: Some("Candidate"),
+            text: "\"Fuck you.\"",
+
+            when: [
+                Any([
+                    TomasFirstImpression(Warm),
+                    TomasFirstImpression(Teasing),
+                ]),
+            ],
+        ),
+
+        (
+            speaker: None,
+            text: r#"
+                Despite himself, he laughs.
+
+                It makes searching considerably harder.
+            "#,
+
+            when: [
+                Any([
+                    TomasFirstImpression(Warm),
+                    TomasFirstImpression(Teasing),
+                ]),
+            ],
+        ),
+
+        (
+            speaker: Some("Candidate"),
+            text: "\"Very funny.\"",
+
+            when: [
+                Any([
+                    TomasFirstImpression(Blunt),
+                    TomasFirstImpression(Distant),
+                ]),
+            ],
+        ),
+        (
+            speaker: None,
+            text: r#"
+                He doesn't laugh.
+
+                He finds the form on his own, and doesn't look at you again
+                until the recruiter has stamped it.
+            "#,
+
+            when: [
+                Any([
+                    TomasFirstImpression(Blunt),
+                    TomasFirstImpression(Distant),
+                ]),
+            ],
+        ),
+    ],
+
+    next: Some("act1_002.after_tomas_turn"),
+),
+
+(
+    act: 1,
+    sub: 2,
+    location: "enlistment_line",
+    id: "act1_002.tomas_discreet_help",
+    messages: [
+        (
+            speaker: None,
+            text: r#"
+                His eyes follow yours.
+
+                He pulls the correct form free.
+            "#,
+        ),
+
+        (
+            speaker: Some("Candidate"),
+            text: "\"Got it.\"",
+        ),
+
+        (
+            speaker: None,
+            text: r#"
+                A few seconds later, without quite looking at you:
+            "#,
+        ),
+
+        (
+            speaker: Some("Candidate"),
+            text: "\"Thanks.\"",
+        ),
+
+        (
+            speaker: None,
+            text: r#"
+                He squares the edges of the stack. Squares them again.
+            "#,
+        ),
+    ],
+
+    next: Some("act1_002.after_tomas_turn"),
+),
+
+(
+    act: 1,
+    sub: 2,
+    location: "enlistment_line",
+    id: "act1_002.tomas_help_search",
+    messages: [
+        (
+            speaker: None,
+            text: r#"
+                You take part of the stack before it spills.
+
+                Between the two of you, you find the declaration.
+            "#,
+        ),
+
+        (
+            speaker: Some("Candidate"),
+            text: "\"Thanks.\"",
+        ),
+
+        (
+            speaker: None,
+            text: r#"
+                He takes the rest of the stack back out of your hands fast.
+            "#,
+        ),
+    ],
+
+    next: Some("act1_002.after_tomas_turn"),
+),
+
+(
+    act: 1,
+    sub: 2,
+    location: "enlistment_line",
+    id: "act1_002.tomas_help_agility",
+    messages: [
+        (
+            speaker: None,
+            text: r#"
+                The folder starts to fold open.
+
+                You catch the loose stack against his forearm before anything
+                hits the floor, spot the declaration as the papers separate,
+                and slide it free.
+            "#,
+        ),
+        (
+            speaker: Some("Candidate"),
+            text: "\"...Okay. Thanks.\"",
+        ),
+
+
+        (
+            speaker: None,
+            text: r#"
+                He takes the papers back.
+            "#,
+        ),
+
+        (
+            speaker: Some("Candidate"),
+            text: "\"...Thanks.\"",
+        ),
+    ],
+
+    next: Some("act1_002.after_tomas_turn"),
+),
+
+(
+    act: 1,
+    sub: 2,
+    location: "enlistment_line",
+    id: "act1_002.tomas_help_deception",
+    messages: [
+        (
+            speaker: None,
+            text: r#"
+                You say it flatly, the way you'd repeat something boring that
+                everyone already knows.
+
+                The recruiter stops. Scratches his head. Looks at the portrait
+                on the wall.
+            "#,
+        ),
+
+        (
+            speaker: Some("Recruiter"),
+            text: "\"...Tomorrow. Fine. Next.\"",
+        ),
+
+        (
+            speaker: None,
+            text: r#"
+                He waves the candidate through and calls the next name.
+
+                It isn't until they're both past the barrier that the candidate
+                looks at you.
+            "#,
+        ),
+
+        (
+            speaker: Some("Candidate"),
+            text: "\"...I don't recall the major saying anything like that.\"",
+        ),
+
+        (
+            speaker: Some("Candidate"),
+            text: "\"Did you...?...Thanks.\"",
+        ),
+    ],
+
+    next: Some("act1_002.after_tomas_turn"),
+),
+
+(
+    act: 1,
+    sub: 2,
+    location: "enlistment_line",
+    id: "act1_002.tomas_public_defense",
+    messages: [
+        (
+            speaker: Some("Recruiter"),
+            text: "\"Did I ask you?\"",
+        ),
+
+        (
+            speaker: None,
+            text: r#"
+                The candidate's expression tightens.
+            "#,
+        ),
+
+        (
+            speaker: Some("Candidate"),
+            text: "\"I have it.\"",
+        ),
+
+        (
+            speaker: None,
+            text: r#"
+                He finds the declaration and hands it over.
+            "#,
+        ),
+
+        (
+            speaker: Some("Candidate"),
+            text: "\"Thanks. But I had it.\"",
+        ),
+    ],
+
+    next: Some("act1_002.after_tomas_turn"),
+),
+
+(
+    act: 1,
+    sub: 2,
+    location: "intake_yard",
+    id: "act1_002.after_tomas_turn",
+
+    on_enter: [
+        (
+            when: [
+                TomasFirstImpression(Blunt),
+                Flag(CadetHelpedTomasAtIntake),
+            ],
+
+            effects: [
+                SetTomasFirstImpression(Teasing),
+            ],
+        ),
+
+        (
+            when: [
+                TomasFirstImpression(Distant),
+                Flag(CadetHelpedTomasAtIntake),
+            ],
+
+            effects: [
+                SetTomasFirstImpression(Blunt),
+            ],
+        ),
+        (
+            when: [
+                TomasFirstImpression(Blunt),
+                Flag(CadetThrewOneLessBackAtTomas),
+            ],
+
+            effects: [
+                SetTomasFirstImpression(Distant),
+            ],
+        ),
+
+        (
+            when: [
+                TomasFirstImpression(Teasing),
+                Flag(CadetThrewOneLessBackAtTomas),
+            ],
+
+            effects: [
+                SetTomasFirstImpression(Blunt),
+            ],
+        ),
+
+        (
+            when: [
+                TomasFirstImpression(Warm),
+                Flag(CadetThrewOneLessBackAtTomas),
+            ],
+
+            effects: [
+                SetTomasFirstImpression(Teasing),
+            ],
+        ),
+    ],
+
+    messages: [
+        (
+            speaker: None,
+            text: r#"
+                You clear the desk a few minutes after he does.
+
+                Loyalty to the Empire before family, faith and self. Stamp.
+            "#,
+        ),
+
+        // Distant: no scene.
+        (
+            speaker: None,
+            text: r#"
+                He's already halfway across the yard, folder under his arm,
+                walking toward the shade with everyone else.
+            "#,
+
+            when: [
+                TomasFirstImpression(Distant),
+            ],
+        ),
+
+        // Everyone else: he's there, and he gives you his name. This is a
+        // formality between two people who will be sharing a building, not
+        // a reward for friendship.
+        (
+            speaker: None,
+            text: r#"
+                He's past the barrier, standing off to the side with the folder
+                under his arm.
+            "#,
+
+            when: [
+                Not(
+                    TomasFirstImpression(Distant),
+                ),
+            ],
+        ),
+
+        (
+            speaker: Some("Candidate"),
+            text: "\"Avelar.\"",
+
+            when: [
+                Not(
+                    TomasFirstImpression(Distant),
+                ),
+            ],
+        ),
+
+        (
+            speaker: None,
+            text: r#"
+                He adjusts the folder under his arm.
+            "#,
+
+            when: [
+                Not(
+                    TomasFirstImpression(Distant),
+                ),
+            ],
+        ),
+
+        (
+            speaker: Some("Candidate"),
+            text: "\"Tomás.\"",
+
+            when: [
+                Not(
+                    TomasFirstImpression(Distant),
+                ),
+            ],
+        ),
+
+        (
+            speaker: Some("Tomás"),
+            text: "\"That thing back there. I'd have found it.\"",
+
+            when: [
+                Flag(CadetPubliclyDefendedTomas),
+            ],
+        ),
+
+        (
+            speaker: Some("Tomás"),
+            text: "\"But thanks. I know how it looked.\"",
+
+            when: [
+                Flag(CadetPubliclyDefendedTomas),
+            ],
+        ),
+
+        (
+            speaker: Some("Tomás"),
+            text: "\"Still thinking about what you said. About it happening to me.\"",
+
+            when: [
+                Flag(CadetChallengedTomas),
+                Not(
+                    TomasFirstImpression(Distant),
+                ),
+            ],
+        ),
+
+        (
+            speaker: Some("Tomás"),
+            text: "\"It wouldn't have.\"",
+
+            when: [
+                Flag(CadetChallengedTomas),
+                Not(
+                    TomasFirstImpression(Distant),
+                ),
+            ],
+        ),
+
+        (
+            speaker: None,
+            text: r#"
+                He watches the line for a while. It hasn't gotten shorter.
+            "#,
+
+            when: [
+                Not(
+                    TomasFirstImpression(Distant),
+                ),
+            ],
+        ),
+
+        (
+            speaker: Some("Tomás"),
+            text: "\"So why'd you sign up?\"",
+
+            when: [
+                Not(
+                    TomasFirstImpression(Distant),
+                ),
+            ],
+        ),
+    ],
+
+    choices: [
+        (
+            id: "father",
+            text: "\"My father was a Lenhador. Went over a wall ten years ago. Never came back.\"",
+
+            when: [
+                Not(
+                    TomasFirstImpression(Distant),
+                ),
+            ],
+
+            effects: [
+                SetFlag(CadetMentionedFather),
+            ],
+
+            next: "act1_002.after_father",
+        ),
+
+        (
+            id: "practical",
+            text: "\"Money. Same as everyone else in this line.\"",
+
+            when: [
+                Not(
+                    TomasFirstImpression(Distant),
+                ),
+            ],
+
+            next: "act1_002.after_practical",
+        ),
+
+        (
+            id: "deflect",
+            text: "\"You first.\"",
+
+            when: [
+                Not(
+                    TomasFirstImpression(Distant),
+                ),
+            ],
+
+            next: "act1_002.after_deflect",
+        ),
+
+        (
+            id: "offend",
+            text: "\"Ask me again when you can hold a folder.\"",
+
+            when: [
+                Not(
+                    TomasFirstImpression(Distant),
+                ),
+            ],
+
+            effects: [
+                SetFlag(CadetOffendedTomas),
+            ],
+
+            next: "act1_002.after_offend",
+        ),
+
+        (
+            id: "keep_walking",
+            text: "<Head for the shade.>",
+
+            when: [
+                TomasFirstImpression(Distant),
+            ],
+
+            next: "act1_002.arrival_end",
+        ),
+    ],
+
+    next: None,
+),
+
+(
+    act: 1,
+    sub: 2,
+    location: "intake_yard",
+    id: "act1_002.after_father",
+    messages: [
+        (
+            speaker: None,
+            text: r#"
+                He looks at you.
+            "#,
+        ),
+
+        (
+            speaker: Some("Tomás"),
+            text: "\"Oh.\"",
+        ),
+
+        (
+            speaker: None,
+            text: r#"
+                A few seconds.
+            "#,
+        ),
+
+        (
+            speaker: Some("Tomás"),
+            text: "\"Right.\"",
+        ),
+
+        (
+            speaker: Some("Tomás"),
+            text: "\"So that's yours.\"",
+        ),
+    ],
+
+    next: Some("act1_002.arrival_end"),
+),
+
+(
+    act: 1,
+    sub: 2,
+    location: "intake_yard",
+    id: "act1_002.after_practical",
+    messages: [
+        (
+            speaker: Some("Tomás"),
+            text: "\"Honest, at least.\"",
+        ),
+
+        (
+            speaker: Some("Tomás"),
+            text: "\"Everyone ahead of us has a speech ready. You'll hear about forty of them this week.\"",
+        ),
+    ],
+
+    next: Some("act1_002.arrival_end"),
+),
+
+(
+    act: 1,
+    sub: 2,
+    location: "intake_yard",
+    id: "act1_002.after_deflect",
+    messages: [
+        (
+            speaker: None,
+            text: r#"
+                He waits to see whether anything else is coming. Nothing is.
+            "#,
+        ),
+
+        (
+            speaker: Some("Tomás"),
+            text: "\"Fair. It's a stupid question to ask on the first day.\"",
+        ),
+        (
+            speaker: None,
+            text: r#"
+                He asked it anyway, which tells you he wanted to be asked back.
+            "#,
+            when: [
+                SkillAtLeast(
+                    skill: Empathy,
+                    value: 20,
+                ),
+            ]
+        ),
+    ],
+
+    next: Some("act1_002.arrival_end"),
+),
+
+(
+    act: 1,
+    sub: 2,
+    location: "intake_yard",
+    id: "act1_002.after_offend",
+    messages: [
+        (
+            speaker: Some("Tomás"),
+            text: "\"Right.\"",
+        ),
+
+        (
+            speaker: None,
+            text: r#"
+                He grins, adjusts the folder under his arm, which is the only thing he
+                can do with his hands at this particular moment.
+            "#,
+        ),
+
+        (
+            speaker: Some("Tomás"),
+            text: "\"Good luck in there.\"",
+        ),
+
+        (
+            speaker: None,
+            text: r#"
+                He walks off toward the shade.
+            "#,
+        ),
+    ],
+
+    next: Some("act1_002.arrival_end"),
+),
+
+// CLOSING
+
+(
+    act: 1,
+    sub: 2,
+    location: "intake_yard",
+    id: "act1_002.arrival_end",
+    messages: [
+        (
+            speaker: None,
+            text: r#"
+                Behind you, the nervous candidate is back at the desk.
+            "#,
+        ),
+
+        (
+            speaker: None,
+            text: r#"
+                The recruiter glances at the signature again.
+
+                He sighs.
+
+                Stamp.
+
+                The kid is waved through.
+            "#,
+        ),
+
+        (
+            speaker: Some("Tomás"),
+            text: "\"You called it.\"",
+
+            when: [
+                Flag(CadetPredictedRecruiterOutcome),
+                Not(
+                    Flag(CadetOffendedTomas),
+                ),
+                Not(
+                    TomasFirstImpression(Distant),
+                ),
+            ],
+        ),
+
+        (
+            speaker: None,
+            text: r#"
+                The kid passes you on his way to the yard.
+            "#,
+
+            when: [
+                Flag(CadetOpenlyQuestionedAuthority),
+            ],
+        ),
+    ],
+
+    on_enter: [
+        (
+            when: [
+                Flag(CadetPredictedRecruiterOutcome),
+                Not(
+                    Flag(CadetOffendedTomas),
+                ),
+                Not(
+                    TomasFirstImpression(Distant),
+                ),
+            ],
+
+            effects: [
+                SetFlag(TomasRespectsCadetJudgment),
+            ],
+        ),
+    ],
+
+    next: Some("act1_002.barracks_assignment"),
+),
+
+(
+    act: 1,
+    sub: 2,
+    location: "barracks_214",
+    id: "act1_002.barracks_assignment",
+    messages: [
+        (
+            speaker: None,
+            text: r#"
+                Hours later, names are called in groups of four.
+            "#,
+        ),
+
+        (
+            speaker: Some("NCO"),
+            text: "\"Avelar, Tomás.\"",
+        ),
+
+        (
+            speaker: Some("NCO"),
+            text: "\"[PLAYER_NAME]\"",
+        ),
+
+        (
+            speaker: Some("NCO"),
+            text: "\"Silva, Rafael.\"",
+        ),
+
+        (
+            speaker: Some("NCO"),
+            text: "\"Siqueira, Nadja. Room 214.\"",
+        ),
+
+        // On the Distant and offended routes this is where the name arrives.
+        (
+            speaker: None,
+            text: r#"
+                So that's his name.
+            "#,
+
+            when: [
+                Any([
+                    TomasFirstImpression(Distant),
+                    Flag(CadetOffendedTomas),
+                ]),
+            ],
+        ),
+
+        (
+            speaker: None,
+            text: r#"
+                The candidate from the line looks over at you.
+            "#,
+
+            when: [
+                Not(
+                    TomasFirstImpression(Distant),
+                ),
+                Not(
+                    Flag(CadetOffendedTomas),
+                ),
+            ],
+        ),
+
+        (
+            speaker: Some("Tomás"),
+            text: "\"No fucking way.\"",
+
+            when: [
+                Not(
+                    TomasFirstImpression(Distant),
+                ),
+                Not(
+                    Flag(CadetOffendedTomas),
+                ),
+            ],
+        ),
+
+        (
+            speaker: None,
+            text: r#"
+                Room 214 is small and functional.
+
+                Four lockers. Two bunk beds. Bare walls, except for the same
+                laminated portrait, issued one to a room.
+
+                Names have already been taped to the bedframes.
+
+                Tomás reads them.
+
+                Then reads them again.
+
+                You and Tomás have been assigned the same bunk.
+            "#,
+        ),
+
+        (
+            speaker: Some("Tomás"),
+            text: "\"You've got to be kidding me.\"",
+
+            when: [
+                Not(
+                    Flag(CadetOffendedTomas),
+                ),
+            ],
+        ),
+    ],
+
+    choices: [
+        (
+            id: "claim_top",
+            text: "\"Top bunk's mine.\"",
+
+            next: "act1_002.barracks_claim_top",
+        ),
+
+        (
+            id: "offer_choice",
+            text: "\"You care which one you get?\"",
+
+            next: "act1_002.barracks_offer_choice",
+        ),
+
+        (
+            id: "could_be_worse",
+            text: "\"Could've been worse.\"",
+
+            when: [
+                Not(
+                    Flag(CadetOffendedTomas),
+                ),
+            ],
+
+            next: "act1_002.barracks_could_be_worse",
+        ),
+
+        (
+            id: "one_less_callback",
+            text: "\"One less would've been nice.\"",
+
+            when: [
+                Flag(CadetThrewOneLessBackAtTomas),
+            ],
+
+            next: "act1_002.barracks_one_less",
+        ),
+
+        (
+            id: "silent",
+            text: "<Drop your bag beside the bunk.>",
+
+            next: "act1_002.barracks_silent",
+        ),
+    ],
+
+    next: None,
+),
+
+(
+    act: 1,
+    sub: 2,
+    location: "barracks_214",
+    id: "act1_002.barracks_claim_top",
+    messages: [
+        (
+            speaker: Some("Tomás"),
+            text: "\"By all means.\"",
+        ),
+
+        (
+            speaker: None,
+            text: r#"
+                He takes the bottom. Starts unpacking.
+            "#,
+        ),
+    ],
+
+    next: Some("act1_002.barracks_close"),
+),
+
+(
+    act: 1,
+    sub: 2,
+    location: "barracks_214",
+    id: "act1_002.barracks_offer_choice",
+    messages: [
+        (
+            speaker: Some("Tomás"),
+            text: "\"Bottom. I get up early and I'd rather not do it from a ladder.\"",
+
+            when: [
+                Not(
+                    Flag(CadetOffendedTomas),
+                ),
+            ],
+        ),
+
+        (
+            speaker: Some("Tomás"),
+            text: "\"Doesn't matter.\"",
+
+            when: [
+                Flag(CadetOffendedTomas),
+            ],
+        ),
+
+        (
+            speaker: None,
+            text: r#"
+                He puts his bag on the bottom bunk.
+            "#,
+
+            when: [
+                Flag(CadetOffendedTomas),
+            ],
+        ),
+    ],
+
+    next: Some("act1_002.barracks_close"),
+),
+
+(
+    act: 1,
+    sub: 2,
+    location: "barracks_214",
+    id: "act1_002.barracks_could_be_worse",
+    messages: [
+        (
+            speaker: Some("Tomás"),
+            text: "\"Could it?\"",
+        ),
+
+        (
+            speaker: None,
+            text: r#"
+                He throws his bag onto the bottom bunk.
+            "#,
+        ),
+    ],
+
+    next: Some("act1_002.barracks_close"),
+),
+
+(
+    act: 1,
+    sub: 2,
+    location: "barracks_214",
+    id: "act1_002.barracks_one_less",
+    messages: [
+        (
+            speaker: Some("Tomás"),
+            text: "\"You're going to run that into the ground, aren't you.\"",
+
+            when: [
+                Not(
+                    Flag(CadetOffendedTomas),
+                ),
+            ],
+        ),
+
+        (
+            speaker: None,
+            text: r#"
+                He doesn't answer. He puts his bag on the bottom bunk.
+            "#,
+
+            when: [
+                Flag(CadetOffendedTomas),
+            ],
+        ),
+    ],
+
+    next: Some("act1_002.barracks_close"),
+),
+
+(
+    act: 1,
+    sub: 2,
+    location: "barracks_214",
+    id: "act1_002.barracks_silent",
+    messages: [
+        (
+            speaker: None,
+            text: r#"
+                You drop your bag beside the bunk.
+
+                He waits for you to say something about the arrangement. You
+                don't, so he stops waiting and starts unpacking.
+            "#,
+        ),
+    ],
+
+    next: Some("act1_002.barracks_close"),
+),
+
+(
+    act: 1,
+    sub: 2,
+    location: "barracks_214",
+    id: "act1_002.barracks_close",
+    messages: [
+        (
+            speaker: Some("Tomás"),
+            text: "\"See you at five, then.\"",
+
+            when: [
+                TomasFirstImpression(Warm),
+                Not(
+                    Flag(CadetOffendedTomas),
+                ),
+            ],
+        ),
+
+        (
+            speaker: Some("Tomás"),
+            text: "\"We're going to hate each other by Friday.\"",
+
+            when: [
+                TomasFirstImpression(Teasing),
+                Not(
+                    Flag(CadetOffendedTomas),
+                ),
+            ],
+        ),
+
+        (
+            speaker: Some("Tomás"),
+            text: "\"You really can't keep your mouth shut, can you.\"",
+
+            when: [
+                TomasFirstImpression(Teasing),
+                Flag(CadetOpenlyQuestionedAuthority),
+                Not(
+                    Flag(CadetOffendedTomas),
+                ),
+            ],
+        ),
+
+        (
+            speaker: Some("Tomás"),
+            text: "\"You say what you think. That'll get you in trouble here.\"",
+
+            when: [
+                TomasFirstImpression(Blunt),
+                Not(
+                    Flag(CadetOffendedTomas),
+                ),
+            ],
+        ),
+
+        (
+            speaker: Some("Tomás"),
+            text: "\"If you need anything.\"",
+
+            when: [
+                TomasFirstImpression(Distant),
+                Not(
+                    Flag(CadetOffendedTomas),
+                ),
+            ],
+        ),
+
+        (
+            speaker: Some("Tomás"),
+            text: "\"That declaration. You found it in my folder faster than I did, and I'm the one who put it there.\"",
+
+            when: [
+                Any([
+                    Flag(TomasNoticedCadetObservant),
+                    Flag(TomasNoticedCadetMemory),
+                ]),
+                Not(
+                    Flag(CadetOffendedTomas),
+                ),
+            ],
+        ),
+
+        (
+            speaker: Some("Tomás"),
+            text: "\"You have fast hands. That's going to be annoying, I thought I was going to be the best shot in the class.\"",
+
+            when: [
+                Flag(TomasNoticedCadetQuickHands),
+                Not(
+                    Flag(CadetOffendedTomas),
+                ),
+            ],
+        ),
+
+        (
+            speaker: Some("Tomás"),
+            text: "\"That thing you did at the desk. Don't do it in front of cadre.\"",
+
+            when: [
+                Flag(TomasNoticedCadetDeceptive),
+                Not(
+                    Flag(CadetOffendedTomas),
+                ),
+            ],
+        ),
+
+        (
+            speaker: Some("Tomás"),
+            text: "\"And... thanks. Back there.\"",
+
+            when: [
+                Flag(CadetHelpedTomasAtIntake),
+                Not(
+                    Flag(CadetOffendedTomas),
+                ),
+            ],
+        ),
+
+        (
+            speaker: Some("Tomás"),
+            text: "\"You were right about the line, by the way. My legs are dead.\"",
+
+            when: [
+                Flag(CadetGaveTomasPracticalAdvice),
+                Not(
+                    Flag(CadetOffendedTomas),
+                ),
+            ],
+        ),
+
+        (
+            speaker: Some("Tomás"),
+            text: "\"And you were right about that recruiter.\"",
+
+            when: [
+                Flag(TomasRespectsCadetJudgment),
+            ],
+        ),
+
+        (
+            speaker: Some("Tomás"),
+            text: "\"For what it's worth. Nobody in that line was at their best today.\"",
+
+            when: [
+                Flag(CadetSharedVulnerabilityWithTomas),
+                Not(
+                    Flag(CadetOffendedTomas),
+                ),
+            ],
+        ),
+
+        // Offended: no closing conversation
+        (
+            speaker: None,
+            text: r#"
+                He unpacks without looking up.
+            "#,
+
+            when: [
+                Flag(CadetOffendedTomas),
+            ],
+        ),
+
+        (
+            speaker: Some("Tomás"),
+            text: "\"Don't move my stuff.\"",
+
+            when: [
+                Flag(CadetOffendedTomas),
+            ],
+        ),
+
+        (
+            speaker: None,
+            text: r#"
+                A whistle cuts through the corridor.
+            "#,
+        ),
+
+        (
+            speaker: Some("Tomás"),
+            text: "\"Guess we're stuck with each other.\"",
+
+            when: [
+                Not(
+                    Flag(CadetOffendedTomas),
+                ),
+                Not(
+                    TomasFirstImpression(Distant),
+                ),
+            ],
+        ),
+    ],
+
+    next: Some("act1_003.start"),
+),
+
+// ACT1-003
+(
+    act: 1,
+    sub: 3,
+    location: "supply_depot",
+    id: "act1_003.start",
+    messages: [
+        (
+            speaker: None,
+            text: r#"
+                [ACT 1-003 - The recovered notebook. Not yet written.]
+            "#,
+        ),
+    ],
+
+    next: None,
+),
 ]

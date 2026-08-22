@@ -35,7 +35,7 @@ pub(super) fn render(
         .block(
             Block::new()
                 .bold()
-                .fg(Color::Blue)
+                .fg(Color::White)
                 .borders(Borders::ALL),
         );
 
