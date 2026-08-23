@@ -1,15 +1,5 @@
 #![enable(implicit_some)]
 
-// CHECKS
-//
-// Two scales, two conditions. Do not merge them.
-//
-//   AttributeAtLeast(attribute: Perception, value: 2)   // 0-5
-//   SkillAtLeast(skill: Empathy, value: 20)             // 0-100
-//
-// Attributes: Perception, Memory, Reasoning, Will, Physique, Agility.
-// Everything else in the ledger is a skill.
-
 [
 (
     act: 0,
@@ -32,7 +22,6 @@
     ],
     next: None,
 ),
-
 (
     act: 1,
     sub: 1,
@@ -43,7 +32,7 @@
             speaker: None,
             text: "In 2010, the world tore open.
 
-            Rifts opened across Earth and unseen creatures emerged from Tartarus.
+            Rifts opened across Earth, and creatures emerged from whatever lay beyond them. Humanity gave that place many names. Tartarus was the one that stuck.
 
             In the span of 3 years, some regions were effectively lost:
             Siberia,
@@ -80,7 +69,7 @@
             Ten years ago, your father, one of those soldiers himself, crossed one of those walls.
             He never came back.
 
-            It is the year 2053, and today, Cadet, you volunteered to become a Lenhador.
+            It is the year 2053, and today, Cadet, you report for Lenhador induction.
             ",
         ),
     ],
@@ -100,13 +89,13 @@
             text: "Goiânia, July 6th 2053
             It's winter. Though in the midwest there are only two seasons: hot and dry (winter and autumn), and hot and wet (summer and spring). You feel your throat dry up under the sun while the shade of a cloud is the only comfort.
 
-            Ahead of you is a long intake line. Everyone is holding documents or keeping them close, each with their respective suitcase holding minimal clothes. All waiting for the moment they will be asked for them. With varying degrees of preparation, nervousness and anticipation. Some brought food: box juice, cereal bars. Others didn't even bring a water bottle or a cap to protect from the sun.
+            Ahead of you is a long intake line. Everyone is holding documents or keeping them close, each with their respective suitcase holding minimal clothes. All waiting for the moment they will be asked for them. Some hold their folders in both hands, like plates. Others keep checking the same bag pocket that hasn't changed since the last check. Some brought food: box juice, cereal bars. Others didn't even bring a water bottle or a cap to protect from the sun.
 
             White T-shirts, white sneakers, blue jeans. The standard cotton swab loadout, as it's called in the armed forces. Some candidates already shaved their heads; others clearly held onto their hair until the last possible day.
 
             A few eventually sit on the floor. The line moves so slowly that standing for three or four hours accomplishes nothing.
 
-            A slightly uneasy candidate stands nearby. Looking like a cotton swab, like everyone else, though his brown quill hairstyle stands out and, in a way, denounces his partial commitment to letting go of his past life. He's white, yellowish-green eyes, perhaps of southern or uruguayan descent. You heard that uruguayans born past 2030 are able to become Lenhadores. He holds a thick, transparent folder containing forms, documents and medical exams.
+            A slightly uneasy candidate stands immediately in front of you. Looking like a cotton swab, like everyone else, though his brown quill hairstyle stands out and, in a way, denounces his partial commitment to letting go of his past life. He's white, yellowish-green eyes, perhaps of southern or uruguayan descent. You heard that uruguayans born past 2030 are able to become Lenhadores. He holds a thick, transparent folder containing forms, documents and medical exams.
 
             You begin to feel your legs a bit tired from all the waiting.
             ",
@@ -133,7 +122,12 @@
                 DECLARATION OF PRIOR MILITARY SERVICE - FORM 6-A
                 DECLARATION OF CIVIL AND DEPENDENT STATUS - FORM 8-C
                 AUTHORIZATION FOR BACKGROUND AND SERVICE RECORD REVIEW - FORM 11-F
+            "#,
+        ),
 
+        (
+            speaker: None,
+            text: r#"
                 Then come the documents proving that you are, in fact, yourself.
 
                 NATIONAL ID OF THE EMPIRE OF BRAZIL
@@ -147,7 +141,19 @@
 
                 Secondary School Completion Certificate
                 Secondary School Academic Transcript
+            "#,
+        ),
 
+        (
+            speaker: None,
+            text: r#"
+                Somewhere ahead, a candidate slides his transcript out, looks at it, and files it back two documents deeper.
+            "#,
+        ),
+
+        (
+            speaker: None,
+            text: r#"
                 Then the documents proving that, as far as several different offices are concerned, you have not done anything that would prevent you from being here.
 
                 Certificate of Civic Regularity
@@ -156,7 +162,12 @@
                 Imperial Military Justice - Negative Record Certificate
                 Provincial Civil Justice - Negative Record Certificate
                 Declaration of Moral Suitability for Imperial Service
+            "#,
+        ),
 
+        (
+            speaker: None,
+            text: r#"
                 And then there is the medical file.
 
                 PERSONAL AND FAMILY MEDICAL HISTORY - FORM MED-1
@@ -181,7 +192,19 @@
                 Exercise Stress Test
                 Pure-Tone and Speech Audiometry
                 Complete Ophthalmological Examination
+            "#,
+        ),
 
+        (
+            speaker: None,
+            text: r#"
+                A girl two places up holds her chest radiograph at arm's length against the light. The plastic has gone warm and slightly soft in the sun.
+            "#,
+        ),
+
+        (
+            speaker: None,
+            text: r#"
                 That would already be enough paperwork for most branches of the Army.
 
                 You volunteered for the Lenhadores.
@@ -194,7 +217,12 @@
                 DECLARATION OF PRIOR ABYSSAL EXPOSURE - FORM 33-E
                 CONTAMINATION AND ANOMALOUS EXPOSURE SCREENING CERTIFICATE - LC-AE/5
                 DECLARATION OF PRIOR USE OF CONTROLLED METAMORPHIC AGENTS - FORM 33-F
+            "#,
+        ),
 
+        (
+            speaker: None,
+            text: r#"
                 And, finally, some medical forms.
 
                 INFORMED CONSENT FOR METAMORPHIC INDUCTION - FORM 33-C
@@ -204,8 +232,20 @@
                 DESIGNATION OF NEXT OF KIN - FORM 33-H
                 DESIGNATION FOR RELEASE OF PERSONAL EFFECTS - FORM 33-H/II
                 DECLARATION CONCERNING RECOVERY AND DISPOSITION OF REMAINS - FORM 33-H/III
+            "#,
+        ),
 
-                Getting all of it here was an ordeal in itself, and quite expensive. You only had a month to gather all.
+        (
+            speaker: None,
+            text: r#"
+                Most keep that last one somewhere in the middle of the stack, stapled to Next of Kin, face down.
+            "#,
+        ),
+
+        (
+            speaker: None,
+            text: r#"
+                Getting all of it here was an ordeal in itself, and quite expensive. From the acceptance notice to reporting day, you had a month.
 
                 Most candidates did not bother keeping the entire stack in their hands. Documents they were reasonably sure nobody would ask for remained inside their suitcases.
 
@@ -222,8 +262,9 @@
 
                 There are forty-odd ahead of you.
 
-                The line doesn't advance continuously. It stalls for long
-                stretches, then compresses four or five people at once.
+                The line doesn't advance continuously. It stalls for long stretches, then compresses four or five people at once.
+
+                You can harvest some comfort, and tell that nervous-looking candidate ahead of you that you came up with a plan to rest your legs a bit.
             "#,
 
             when: [
@@ -256,7 +297,7 @@
 
         (
             id: "reasoning_tell_tomas",
-            text: "\"It stalls, then it jumps. Sit through the stalls, stand when it compresses. We will manage to keep our place this way.\"",
+            text: "\"It stalls, then it jumps. Sit when it stops moving, stand when it compresses. We will manage to keep our place and rest our legs this way.\"",
 
             when: [
                 AttributeAtLeast(
@@ -320,28 +361,21 @@
     messages: [
         (
             speaker: Some("Candidate"),
-            text: "\"You've been timing them?\"",
+            text: "\"Hmm, I was thinking about that\"",
         ),
 
         (
             speaker: None,
             text: r#"
-                He looks toward the front of the line, does some arithmetic
-                of his own, then lowers himself against the wall without
-                letting go of his folder.
+                He looks toward the front of the line, does some arithmetic of his own, then lowers himself against the wall without letting go of his folder.
             "#,
-        ),
-
-        (
-            speaker: Some("Candidate"),
-            text: "\"Wake me up when the Empire needs my papers.\"",
         ),
     ],
 
     next: Some("act1_002.signature"),
 ),
 
-// ── The signature ───────────────────────────────────────────
+// The signature
 
 (
     act: 1,
@@ -352,16 +386,11 @@
         (
             speaker: None,
             text: r#"
-                At the front of the slow-moving line, a kid seems to be in
-                trouble. He's shaking.
+                At the front of the slow-moving line, a kid seems to be in trouble. He's shaking.
 
-                The recruiter handling him isn't much older. Camouflage fatigues,
-                sleeves rolled up against the heat, a cheap fan rattling beside
-                the desk.
+                The recruiter handling him isn't much older. Khaki fatigues, sleeves rolled up against the heat, a cheap fan rattling beside the desk.
 
-                Behind him, taped to the wall at an angle nobody has bothered to
-                correct, a laminated portrait of the Emperor has gone pale green
-                in the sun.
+                Behind him, taped to the wall, a laminated portrait of the Emperor has gathered a bit of dust, but keeps an eye on the future Lenhadores.
             "#,
         ),
 
@@ -380,50 +409,33 @@
             text: "\"Should've signed it slower. Go to the end of the line. We'll decide what to do with you when this is over.\"",
         ),
 
-        // Exactly one of the three reads fires. Each one carries a different
-        // part of the picture rather than repeating the same conclusion.
-
         (
             speaker: None,
             text: r#"
                 He isn't angry with the kid.
 
-                He's enjoying how nervous he is, and the way every objection
-                immediately turns into an apology.
+                He's enjoying how nervous he is, and the way every objection immediately turns into an apology.
             "#,
 
             when: [
                 SkillAtLeast(
                     skill: Empathy,
                     value: 20,
-                ),
-                Not(
-                    SkillAtLeast(
-                        skill: MilitaryAffairs,
-                        value: 20,
-                    ),
-                ),
-                Not(
-                    AttributeAtLeast(
-                        attribute: Reasoning,
-                        value: 3,
-                    ),
-                ),
+                )
+            ],
+            effects: [
+                SetFlag(CadetReadRecruiterCorrectly),
             ],
         ),
 
         (
             speaker: None,
             text: r#"
-                He doesn't mark the form, separate it from the others, or look
-                at the ID again before waving the kid away.
+                He doesn't mark the form, separate it from the others, or look at the ID again before waving the kid away.
 
-                This isn't cadre making an enlistment decision. He's a recent
-                recruit on intake duty, bottom of the food chain. Once you are
-                sworn in you will outrank him.
+                This isn't cadre making an enlistment decision. He's a recent recruit on intake duty, bottom of the food chain. Once you are sworn in you will outrank him.
 
-                If the signature were grounds for rejecting a candidate, someone
-                with real authority would have to be called.
+                If the signature were grounds for rejecting a candidate, someone with real authority would have to be called.
 
                 He hasn't called anyone.
             "#,
@@ -449,14 +461,11 @@
         (
             speaker: None,
             text: r#"
-                Sending him to the back of the line instead of escalating it
-                tells you the recruiter doesn't intend to make much of this.
+                Sending him to the back of the line instead of escalating it tells you the recruiter doesn't intend to make much of this.
 
-                Once everyone else is processed, turning it into a real problem
-                means finding a superior, explaining it, and creating work for
-                himself.
+                Once everyone else is processed, turning it into a real problem means finding a superior, explaining it, and creating work for himself.
 
-                Stamping the form will be easier.
+                The recruiter will just stamp the form.
             "#,
 
             when: [
@@ -474,8 +483,7 @@
         (
             speaker: None,
             text: r#"
-                The kid walks past the line without looking at anyone. The next
-                candidate is already putting his papers on the desk.
+                The kid walks past the line without looking at anyone. The next candidate is already putting his papers on the desk.
 
                 After a few minutes, once everything is stamped, the recruiter pulls a laminated card from under the desk and reads off it without looking down.
             "#,
@@ -489,7 +497,7 @@
         (
             speaker: None,
             text: r#"
-                It clearly isn't a question. The candidate's face becomes serious as he says yes.
+                It clearly isn't a question. The candidate's face is clearly serious as he says yes.
 
                 Stamp. Next.
             "#,
@@ -564,7 +572,7 @@
         ),
         (
             id: "authority",
-            text: "\"It's clearly the same guy. They have his picture. They're just being assholes.\"",
+            text: "\"It's clearly the same guy. They have his picture. Those milicos are just being assholes. It's what they call the Little Power Syndrome, right?\"",
 
             when: [
                 Not(
@@ -582,7 +590,7 @@
 
         (
             id: "authority_read",
-            text: "\"He'll let him through. He just wants to make him wait. Anyone with power, even small, enjoys playing with it.\"",
+            text: "\"He'll let him through, eventually. The recruiter just wants to make him wait and savour his moments of authority. Milicos are petty tyrants who enjoy every inch of power they get\"",
 
             when: [
                 Flag(CadetReadRecruiterCorrectly),
@@ -655,8 +663,7 @@
         (
             speaker: None,
             text: r#"
-                He doesn't argue with it. He looks toward the front of the line
-                for a while.
+                He doesn't argue with it. He looks toward the front of the line for a while.
             "#,
         ),
 
@@ -689,8 +696,7 @@
         (
             speaker: None,
             text: r#"
-                He tightens his grip on the folder as he says it, which
-                undermines the point a bit.
+                He tightens his grip on the folder as he says it, which undermines the point a bit.
             "#,
         ),
     ],
@@ -739,6 +745,11 @@
     id: "act1_002.signature_authority",
     messages: [
         (
+            speaker: None,
+            text: "You said that a bit louder than you wanted to. Good thing no one listened. Questioning authority in public could cause you trouble.",
+        ),
+
+        (
             speaker: Some("Candidate"),
             text: "\"Keep your voice down.\"",
         ),
@@ -765,6 +776,11 @@
     location: "enlistment_line",
     id: "act1_002.signature_prediction",
     messages: [
+        (
+            speaker: None,
+            text: "You said that a bit louder than you wanted to. Good thing no one listened. Questioning authority in public could cause you trouble.",
+        ),
+
         (
             speaker: Some("Candidate"),
             text: "\"Keep your voice down.\"",
@@ -820,9 +836,7 @@
 
                 His preparation borders on absurd.
 
-                Forms. Copies. Medical exams. Identification. Copies of the
-                identification. Copies of documents that probably didn't
-                need copies.
+                Forms. Copies. Medical exams. Identification. Copies of the identification. Copies of documents that probably didn't need copies.
 
                 Everything is arranged inside a thick transparent folder.
 
@@ -840,8 +854,6 @@
             text: r#"
                 The candidate reacts immediately.
 
-                Too immediately.
-
                 He pulls out a sheet and hands it over.
             "#,
         ),
@@ -856,40 +868,23 @@
             text: r#"
                 He takes the paper back.
 
-                Now one hand is holding the folder, another is holding the
-                rejected sheet, and somehow he needs a third to search
-                through everything else.
+                Now one hand is holding the folder, another is holding the rejected sheet, and somehow he needs a third to search through everything else.
 
                 The neat stack begins to collapse.
 
-                Behind him, forty people are watching him fail at something he
-                prepared days for. It's the overpreparation that's the most humiliating.
+                A tab divider slips loose. He pins the folder against his hip with an elbow. The rejected sheet is creasing in his grip and he notices, and stops, and can't do anything about it.
+
+                Behind him, forty people are watching him fail at something he prepared days for. It's the overpreparation that's the most humiliating.
             "#,
         ),
 
-        (
-            speaker: None,
-            text: r#"
-                The fitness declaration is visible about halfway through the
-                stack. Its header is printed in a different typeface from the
-                medical forms around it.
-            "#,
-
-            when: [
-                AttributeAtLeast(
-                    attribute: Perception,
-                    value: 3,
-                ),
-            ],
-        ),
 
         (
             speaker: None,
             text: r#"
                 You remember seeing him reorganize the folder earlier.
 
-                He put the fitness declaration immediately beneath the
-                X-ray paperwork.
+                He put the fitness declaration immediately beneath the X-ray paperwork.
             "#,
 
             when: [
@@ -899,12 +894,25 @@
                 ),
             ],
         ),
+        (
+            speaker: None,
+            text: r#"
+                The fitness declaration is visible about halfway through the stack. Its header is printed in a different typeface from the medical forms around it. It's between the X-ray paperwork and a yellow form.
+            "#,
+
+            when: [
+                AttributeAtLeast(
+                    attribute: Perception,
+                    value: 3,
+                ),
+            ],
+        ),
     ],
 
     choices: [
         (
             id: "perception_help",
-            text: "<Whisper> \"Under the white form.\"",
+            text: "<Whisper> \"Above the yellow form.\"",
 
             when: [
                 AttributeAtLeast(
@@ -1041,8 +1049,7 @@
         (
             speaker: None,
             text: r#"
-                He almost drops the entire folder before finding the form
-                himself.
+                He almost drops the entire folder before finding the form himself.
 
                 The recruiter takes it without comment.
             "#,
@@ -1102,8 +1109,7 @@
             text: r#"
                 He doesn't laugh.
 
-                He finds the form on his own, and doesn't look at you again
-                until the recruiter has stamped it.
+                He finds the form on his own, and doesn't look at you again until the recruiter has stamped it.
             "#,
 
             when: [
@@ -1203,9 +1209,7 @@
             text: r#"
                 The folder starts to fold open.
 
-                You catch the loose stack against his forearm before anything
-                hits the floor, spot the declaration as the papers separate,
-                and slide it free.
+                You catch the loose stack against his forearm before anything hits the floor, spot the declaration as the papers separate, and slide it free.
             "#,
         ),
         (
@@ -1239,26 +1243,34 @@
         (
             speaker: None,
             text: r#"
-                You say it flatly, the way you'd repeat something boring that
-                everyone already knows.
+                You say it flatly, the way you'd repeat something boring that everyone already knows.
 
-                The recruiter stops. Scratches his head. Looks at the portrait
-                on the wall.
+                The recruiter stops. Looks at the morning's stamped stack sitting in its tray. Forty forms, every one with a fitness declaration behind it.
+
+                Checking means asking someone. Asking someone means saying, in front of the whole line, that he might have been doing it wrong since eight.
+
+                He scratches his head. Looks at the portrait on the wall.
             "#,
         ),
 
         (
             speaker: Some("Recruiter"),
-            text: "\"...Tomorrow. Fine. Next.\"",
+            text: "\"...Tomorrow. Fine.\"",
+        ),
+
+        (
+            speaker: Some("Recruiter"),
+            text: "\"Do you enter this service of your own will, owing loyalty...
+            Alright, [STAMP] next!
+            \"",
         ),
 
         (
             speaker: None,
             text: r#"
-                He waves the candidate through and calls the next name.
+                He waves the candidate through and calls the next one. You.
 
-                It isn't until they're both past the barrier that the candidate
-                looks at you.
+                It isn't until he's past the barrier that the candidate looks at you, thinking to himself.
             "#,
         ),
 
@@ -1269,7 +1281,7 @@
 
         (
             speaker: Some("Candidate"),
-            text: "\"Did you...?...Thanks.\"",
+            text: "\"Did he...?\"",
         ),
     ],
 
@@ -1314,7 +1326,6 @@
 
     next: Some("act1_002.after_tomas_turn"),
 ),
-
 (
     act: 1,
     sub: 2,
@@ -1381,9 +1392,27 @@
         (
             speaker: None,
             text: r#"
-                You clear the desk a few minutes after he does.
+                Then it's you.
 
-                Loyalty to the Empire before family, faith and self. Stamp.
+                Your papers go onto the desk. The recruiter pulls the ID out from under your fingers before you've let go of it. Pages turn. Forms leave your stack, get flattened, get stamped, and start a second stack facing the other way.
+
+                He holds the ID up. Half a second on the photo. Half a second on your face. Down.
+            "#,
+        ),
+
+        (
+            speaker: Some("Recruiter"),
+            text: "\"Do you enter this service of your own will, owing loyalty to the Empire before family, faith and self.\"",
+        ),
+
+        (
+            speaker: None,
+            text: r#"
+                The card is laminated. The sentence has no question mark anywhere in it.
+
+                You say yes.
+
+                Stamp. Next.
             "#,
         ),
 
@@ -1391,8 +1420,7 @@
         (
             speaker: None,
             text: r#"
-                He's already halfway across the yard, folder under his arm,
-                walking toward the shade with everyone else.
+                He's already halfway across the yard, folder under his arm, walking toward the shade with everyone else.
             "#,
 
             when: [
@@ -1400,14 +1428,10 @@
             ],
         ),
 
-        // Everyone else: he's there, and he gives you his name. This is a
-        // formality between two people who will be sharing a building, not
-        // a reward for friendship.
         (
             speaker: None,
             text: r#"
-                He's past the barrier, standing off to the side with the folder
-                under his arm.
+                He's past the barrier, standing off to the side with the folder under his arm.
             "#,
 
             when: [
@@ -1564,6 +1588,19 @@
         ),
 
         (
+            id: "silent",
+            text: "<Say nothing.>",
+
+            when: [
+                Not(
+                    TomasFirstImpression(Distant),
+                ),
+            ],
+
+            next: "act1_002.after_silent",
+        ),
+
+        (
             id: "offend",
             text: "\"Ask me again when you can hold a folder.\"",
 
@@ -1627,7 +1664,7 @@
 
         (
             speaker: Some("Tomás"),
-            text: "\"So that's yours.\"",
+            text: "\"That's a good reason. Sorry you went through that.\"",
         ),
     ],
 
@@ -1659,29 +1696,135 @@
     sub: 2,
     location: "intake_yard",
     id: "act1_002.after_deflect",
+
+    on_enter: [
+        (
+            effects: [
+                SetFlag(TomasGaveHisReason),
+            ],
+        ),
+    ],
+
+    messages: [
+        (
+            speaker: Some("Tomás"),
+            text: "\"Money.\"",
+        ),
+
+        (
+            speaker: None,
+            text: r#"
+                He answers before you finish asking.
+            "#,
+        ),
+
+        (
+            speaker: Some("Tomás"),
+            text: "\"Pay's stupid for someone my age. And the pension goes to family, if it goes wrong.\"",
+        ),
+
+        (
+            speaker: None,
+            text: r#"
+                That one was ready. So are the other two, lined up behind it: security, service. He picked the one that needed the least explaining.
+            "#,
+
+            when: [
+                SkillAtLeast(
+                    skill: Empathy,
+                    value: 20,
+                ),
+            ],
+        ),
+
+        (
+            speaker: None,
+            text: r#"
+                He waits.
+            "#,
+        ),
+    ],
+
+    choices: [
+        (
+            id: "father",
+            text: "\"My father was a Lenhador. Went over a wall ten years ago. Never came back.\"",
+
+            effects: [
+                SetFlag(CadetMentionedFather),
+            ],
+
+            next: "act1_002.after_father",
+        ),
+
+        (
+            id: "practical",
+            text: "\"Same. Money.\"",
+
+            next: "act1_002.after_practical",
+        ),
+
+        (
+            id: "silent",
+            text: "<Say nothing.>",
+
+            next: "act1_002.after_silent",
+        ),
+    ],
+
+    next: None,
+),
+
+// Reached from two places: before he answered, and after. He is owed a
+// reply in the second case and merely ignored in the first.
+(
+    act: 1,
+    sub: 2,
+    location: "intake_yard",
+    id: "act1_002.after_silent",
     messages: [
         (
             speaker: None,
             text: r#"
                 He waits to see whether anything else is coming. Nothing is.
             "#,
+
+            when: [
+                Not(
+                    Flag(TomasGaveHisReason),
+                ),
+            ],
         ),
 
         (
             speaker: Some("Tomás"),
             text: "\"Fair. It's a stupid question to ask on the first day.\"",
+
+            when: [
+                Not(
+                    Flag(TomasGaveHisReason),
+                ),
+            ],
         ),
+
+        (
+            speaker: Some("Tomás"),
+            text: "\"Right.\"",
+
+            when: [
+                Flag(TomasGaveHisReason),
+            ],
+        ),
+
         (
             speaker: None,
             text: r#"
-                He asked it anyway, which tells you he wanted to be asked back.
+                He gave you his. He doesn't ask again.
             "#,
+
             when: [
-                SkillAtLeast(
-                    skill: Empathy,
-                    value: 20,
-                ),
-            ]
+                Flag(TomasGaveHisReason),
+            ],
         ),
     ],
 
@@ -1702,8 +1845,7 @@
         (
             speaker: None,
             text: r#"
-                He grins, adjusts the folder under his arm, which is the only thing he
-                can do with his hands at this particular moment.
+                Whatever his face was doing a moment ago, it stops. He adjusts the folder under his arm and doesn't answer.
             "#,
         ),
 
@@ -1808,7 +1950,13 @@
         (
             speaker: None,
             text: r#"
-                Hours later, names are called in groups of four.
+                The rest of the day is more lines.
+
+                A line for a wristband. A line for a bedding roll. The same instructions repeated at every station, word for word, to each group of ten.
+
+                The water in your bottle has been warm since noon. The last cereal bars come out of bags. Candidates shift their folders from one hand to the other, then back. The shade you watched all morning crosses the yard and ends up against the far wall.
+
+                Near evening, names are called in groups of four.
             "#,
         ),
 
@@ -1832,11 +1980,10 @@
             text: "\"Siqueira, Nadja. Room 214.\"",
         ),
 
-        // On the Distant and offended routes this is where the name arrives.
         (
             speaker: None,
             text: r#"
-                So that's his name.
+                Avelar, Tomás. The candidate from the line is in your group.
             "#,
 
             when: [
@@ -1882,10 +2029,13 @@
             text: r#"
                 Room 214 is small and functional.
 
-                Four lockers. Two bunk beds. Bare walls, except for the same
-                laminated portrait, issued one to a room.
+                Four lockers, doors ajar, keys hanging in the locks. Two bunk beds, mattresses still in plastic. One window, painted shut, looking onto the yard you spent the day in. The room smells of floor wax and, under it, faintly, of whoever lived here before.
 
-                Names have already been taped to the bedframes.
+                Bare walls, except for the same laminated portrait, issued one to a room.
+
+                Boots and voices move down the corridor. Doors keep opening in the same rhythm, four names at a time.
+
+                Names have already been taped to the bedframes. Typed, cut into strips.
 
                 Tomás reads them.
 
@@ -2085,8 +2235,7 @@
             text: r#"
                 You drop your bag beside the bunk.
 
-                He waits for you to say something about the arrangement. You
-                don't, so he stops waiting and starts unpacking.
+                He waits for you to say something about the arrangement. You don't, so he stops waiting and starts unpacking.
             "#,
         ),
     ],
@@ -2126,20 +2275,7 @@
 
         (
             speaker: Some("Tomás"),
-            text: "\"You really can't keep your mouth shut, can you.\"",
-
-            when: [
-                TomasFirstImpression(Teasing),
-                Flag(CadetOpenlyQuestionedAuthority),
-                Not(
-                    Flag(CadetOffendedTomas),
-                ),
-            ],
-        ),
-
-        (
-            speaker: Some("Tomás"),
-            text: "\"You say what you think. That'll get you in trouble here.\"",
+            text: "\"Still not sure what to make of you.\"",
 
             when: [
                 TomasFirstImpression(Blunt),
@@ -2151,7 +2287,7 @@
 
         (
             speaker: Some("Tomás"),
-            text: "\"If you need anything.\"",
+            text: "\"We can stay out of each other's way.\"",
 
             when: [
                 TomasFirstImpression(Distant),
@@ -2162,26 +2298,12 @@
         ),
 
         (
-            speaker: Some("Tomás"),
-            text: "\"That declaration. You found it in my folder faster than I did, and I'm the one who put it there.\"",
+            speaker: None,
+            text: r#"
+                He unpacks. Folded, squared, put away in an order he decided on before he got here.
+            "#,
 
             when: [
-                Any([
-                    Flag(TomasNoticedCadetObservant),
-                    Flag(TomasNoticedCadetMemory),
-                ]),
-                Not(
-                    Flag(CadetOffendedTomas),
-                ),
-            ],
-        ),
-
-        (
-            speaker: Some("Tomás"),
-            text: "\"You have fast hands. That's going to be annoying, I thought I was going to be the best shot in the class.\"",
-
-            when: [
-                Flag(TomasNoticedCadetQuickHands),
                 Not(
                     Flag(CadetOffendedTomas),
                 ),
@@ -2202,10 +2324,45 @@
 
         (
             speaker: Some("Tomás"),
-            text: "\"And... thanks. Back there.\"",
+            text: "\"Back at the desk. You knew where that declaration was before I did.\"",
 
             when: [
-                Flag(CadetHelpedTomasAtIntake),
+                Any([
+                    Flag(TomasNoticedCadetObservant),
+                    Flag(TomasNoticedCadetMemory),
+                ]),
+                Not(
+                    Flag(CadetOffendedTomas),
+                ),
+            ],
+        ),
+
+        (
+            speaker: Some("Tomás"),
+            text: "\"You caught that stack before I knew it was going.\"",
+
+            when: [
+                Flag(TomasNoticedCadetQuickHands),
+                Not(
+                    Flag(CadetOffendedTomas),
+                ),
+            ],
+        ),
+
+        (
+            speaker: Some("Tomás"),
+            text: "\"For what it's worth. Nobody in that line was at their best today.\"",
+
+            when: [
+                Flag(CadetSharedVulnerabilityWithTomas),
+                Not(
+                    Any([
+                        Flag(TomasNoticedCadetDeceptive),
+                        Flag(TomasNoticedCadetObservant),
+                        Flag(TomasNoticedCadetMemory),
+                        Flag(TomasNoticedCadetQuickHands),
+                    ]),
+                ),
                 Not(
                     Flag(CadetOffendedTomas),
                 ),
@@ -2219,6 +2376,15 @@
             when: [
                 Flag(CadetGaveTomasPracticalAdvice),
                 Not(
+                    Any([
+                        Flag(TomasNoticedCadetDeceptive),
+                        Flag(TomasNoticedCadetObservant),
+                        Flag(TomasNoticedCadetMemory),
+                        Flag(TomasNoticedCadetQuickHands),
+                        Flag(CadetSharedVulnerabilityWithTomas),
+                    ]),
+                ),
+                Not(
                     Flag(CadetOffendedTomas),
                 ),
             ],
@@ -2226,19 +2392,48 @@
 
         (
             speaker: Some("Tomás"),
-            text: "\"And you were right about that recruiter.\"",
+            text: "\"That thing at the desk. About the recruiter.\"",
 
             when: [
-                Flag(TomasRespectsCadetJudgment),
+                Flag(CadetOpenlyQuestionedAuthority),
+                Not(
+                    Flag(CadetOffendedTomas),
+                ),
+            ],
+        ),
+
+        (
+            speaker: None,
+            text: r#"
+                He looks at the portrait on the wall. The same one as the desk, smaller, and just as crooked.
+            "#,
+
+            when: [
+                Flag(CadetOpenlyQuestionedAuthority),
+                Not(
+                    Flag(CadetOffendedTomas),
+                ),
             ],
         ),
 
         (
             speaker: Some("Tomás"),
-            text: "\"For what it's worth. Nobody in that line was at their best today.\"",
+            text: "\"You said it out loud. In a line. Under one of those.\"",
 
             when: [
-                Flag(CadetSharedVulnerabilityWithTomas),
+                Flag(CadetOpenlyQuestionedAuthority),
+                Not(
+                    Flag(CadetOffendedTomas),
+                ),
+            ],
+        ),
+
+        (
+            speaker: Some("Tomás"),
+            text: "\"I'm not saying you're wrong. I'm saying there were forty people behind you who want your slot.\"",
+
+            when: [
+                Flag(CadetOpenlyQuestionedAuthority),
                 Not(
                     Flag(CadetOffendedTomas),
                 ),

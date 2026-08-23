@@ -1,36 +1,22 @@
-// Crossterm event
-//       ↓
-// game Action
+// What happened in the terminal
 use std::io;
 
-use crossterm::event::{
-    self,
-    Event,
-    KeyCode,
-    KeyEventKind,
-};
+use crossterm::event::{self, Event, KeyCode, KeyEventKind};
 
-use crate::action::Action;
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum Input {
+    Key(KeyCode),
+    Resize,
+}
 
-pub fn read_action() -> io::Result<Option<Action>> {
-    let Event::Key(key) = event::read()? else {
-        return Ok(None);
-    };
-
-    if key.kind != KeyEventKind::Press {
-        return Ok(None);
-    }
-
-    let action = match key.code {
-        KeyCode::Enter | KeyCode::Char(' ') => Some(Action::Advance),
-
-        KeyCode::Up => Some(Action::ScrollUp),
-        KeyCode::Down => Some(Action::ScrollDown),
-
-        KeyCode::Esc | KeyCode::Char('q') => Some(Action::Quit),
-
+/// Blocks until the terminal produces something. Returns `None` for events
+/// we don't care about, such as key releases and mouse motion.
+pub fn read() -> io::Result<Option<Input>> {
+    let input = match event::read()? {
+        Event::Key(key) if key.kind == KeyEventKind::Press => Some(Input::Key(key.code)),
+        Event::Resize(_, _) => Some(Input::Resize),
         _ => None,
     };
 
-    Ok(action)
+    Ok(input)
 }

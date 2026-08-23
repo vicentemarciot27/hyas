@@ -71,7 +71,7 @@ pub enum Condition {
     Any(Vec<Condition>),
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Clone, Copy, Deserialize)]
 pub enum Effect {
     SetFlag(Flag),
     SetTomasFirstImpression(Impression),
@@ -115,6 +115,72 @@ pub enum Skill {
     HeavyWeapons,
 }
 
+impl Attribute {
+    pub const ALL: [Attribute; 6] = [
+        Attribute::Perception,
+        Attribute::Memory,
+        Attribute::Reasoning,
+        Attribute::Will,
+        Attribute::Physique,
+        Attribute::Agility,
+    ];
+
+    pub fn label(self) -> &'static str {
+        match self {
+            Attribute::Perception => "Perception",
+            Attribute::Memory => "Memory",
+            Attribute::Reasoning => "Reasoning",
+            Attribute::Will => "Will",
+            Attribute::Physique => "Physique",
+            Attribute::Agility => "Agility",
+        }
+    }
+}
+
+impl Skill {
+    pub const ALL: [Skill; 17] = [
+        Skill::Persuasion,
+        Skill::Deception,
+        Skill::Intimidation,
+        Skill::Leadership,
+        Skill::Empathy,
+        Skill::Engineering,
+        Skill::Computing,
+        Skill::Science,
+        Skill::Medicine,
+        Skill::Cartography,
+        Skill::MilitaryAffairs,
+        Skill::AbyssalStudies,
+        Skill::History,
+        Skill::Stealth,
+        Skill::Marksmanship,
+        Skill::CloseCombat,
+        Skill::HeavyWeapons,
+    ];
+
+    pub fn label(self) -> &'static str {
+        match self {
+            Skill::Persuasion => "Persuasion",
+            Skill::Deception => "Deception",
+            Skill::Intimidation => "Intimidation",
+            Skill::Leadership => "Leadership",
+            Skill::Empathy => "Empathy",
+            Skill::Engineering => "Engineering",
+            Skill::Computing => "Computing",
+            Skill::Science => "Science",
+            Skill::Medicine => "Medicine",
+            Skill::Cartography => "Cartography",
+            Skill::MilitaryAffairs => "Military Affairs",
+            Skill::AbyssalStudies => "Abyssal Studies",
+            Skill::History => "History",
+            Skill::Stealth => "Stealth",
+            Skill::Marksmanship => "Marksmanship",
+            Skill::CloseCombat => "Close Combat",
+            Skill::HeavyWeapons => "Heavy Weapons",
+        }
+    }
+}
+
 /// FLAGS AND VARIABLES FOR THE POC
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize)]
 pub enum Impression {
@@ -140,6 +206,7 @@ pub enum Flag {
     CadetThrewOneLessBackAtTomas,
     CadetOffendedTomas,
     CadetMentionedFather,
+    TomasGaveHisReason,
     TomasNoticedCadetObservant,
     TomasNoticedCadetMemory,
     TomasNoticedCadetQuickHands,
