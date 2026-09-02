@@ -1,17 +1,40 @@
 // basically anything worth saving
 
+use ratatui::{layout::Position};
+
 use std::collections::{HashMap, HashSet};
 
 use crate::story::model::{
     Attribute, Condition, ConditionalEffects, Effect, Flag, Impression, Passage, Skill,
 };
 
+
+#[derive(Debug)]
+pub enum GameMode {
+    Narrative {
+        passage_id: String,
+    },
+
+    Exploration {
+        map_id: String,
+        position: Position,
+    }
+}
+
+impl GameMode {
+    pub fn passage_id(&self) -> Option<&str> {
+        match self {
+            GameMode::Narrative { passage_id } => Some(passage_id),
+            GameMode::Exploration { .. } => None,
+        }
+    }
+}
+
 #[derive(Debug)]
 pub struct GameState {
     pub player: PlayerState,
     pub story: StoryState,
-
-    pub current_passage_id: String,
+    pub mode: GameMode,
 }
 
 #[derive(Debug, Default)]
@@ -53,7 +76,7 @@ impl GameState {
                 ..Default::default()
             },
             story: StoryState::default(),
-            current_passage_id: start.into(),
+            mode: GameMode::Narrative {passage_id: start.into()},
         }
     }
 
@@ -110,7 +133,7 @@ impl GameState {
     }
 
     pub fn enter(&mut self, passage: &Passage) {
-        self.current_passage_id = passage.id.clone();
+        self.mode = GameMode::Narrative { passage_id: passage.id.clone(), } ;
         self.run_conditional_effects(&passage.on_enter);
     }
 }
@@ -135,9 +158,7 @@ mod tests {
         state
     }
 
-    /// Tomas Impression transitions are order-dependent by design.
-    /// Distant + helped must land on Blunt and stop, not carry on through
-    /// the Blunt -> Teasing rule in the same pass.
+    /// Tomas Impression transitions are order-dependent.
     #[test]
     fn impression_transitions_do_not_cascade() {
         let passage = after_tomas_turn();

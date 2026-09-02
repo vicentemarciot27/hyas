@@ -7,6 +7,7 @@ use thiserror::Error;
 
 use super::{
     model::Passage,
+    model::MapEntry,
     text::dedent,
 };
 
@@ -19,10 +20,20 @@ pub enum LoadError {
     Ron(#[from] ron::error::SpannedError),
 }
 
-pub fn load_passages(path: impl AsRef<Path>) -> Result<Vec<Passage>, LoadError> {
-    let source = fs::read_to_string(path)?;
+/// PASSAGES
+/// Story baked into the binary so the game ships as a single file.
+pub fn embedded_passages() -> Vec<Passage> {
+    parse_passages(include_str!("../../data/passages.ron")).expect("embedded passages.ron should parse")
+}
 
-    let mut passages: Vec<Passage> = ron::from_str(&source)?;
+#[cfg(test)]
+pub fn load_passages<P: AsRef<Path>>(path: P) -> Result<Vec<Passage>, LoadError> {
+    let source = fs::read_to_string(path)?;
+    parse_passages(&source)
+}
+
+fn parse_passages(source: &str) -> Result<Vec<Passage>, LoadError> {
+    let mut passages: Vec<Passage> = ron::from_str(source)?;
 
     normalize_passages(&mut passages);
     validate_passages(&passages);
@@ -49,6 +60,18 @@ fn validate_passages(passages: &[Passage]) {
     if passages.len() == 0 {
         panic!("passages need to be non-empty, dummy :P");
     }
+}
+
+/// MAPS
+/// Story maps baked into the binary so the game ships as a single file.
+pub fn embedded_maps() -> Vec<super::model::MapEntry> {
+    parse_maps(include_str!("../../data/maps.ron")).expect("embedded maps.ron should parse")
+}
+
+pub fn parse_maps(source: &str) -> Result<Vec<MapEntry>, LoadError> {
+    let mut maps: Vec<MapEntry> = ron::from_str(source)?;
+
+    Ok(maps)
 }
 
 #[cfg(test)]

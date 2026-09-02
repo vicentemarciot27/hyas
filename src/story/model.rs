@@ -1,5 +1,6 @@
 use serde::Deserialize;
 
+// Passages
 #[derive(Debug, Deserialize)]
 pub struct Passage {
     pub act: u8,
@@ -212,4 +213,34 @@ pub enum Flag {
     TomasNoticedCadetQuickHands,
     TomasNoticedCadetDeceptive,
     TomasRespectsCadetJudgment,
+}
+
+//// MAPS
+#[derive(Debug, Deserialize)]
+pub enum Direction {
+    East,
+    South,
+}
+
+#[derive(Debug, Deserialize)]
+pub enum CoverType {
+    Half,
+    Full,
+}
+
+#[derive(Debug, Deserialize)]
+pub struct Map {
+    pub width: u16,
+    pub height: u16,
+
+    pub blocked: Vec<(u16, u16)>, // list of tiles the character can't walk into
+    pub cover: Vec<(u16, u16, Direction, CoverType)>, // list of tiles that provide cover, with direction and type
+}
+
+#[derive(Debug, Deserialize)]
+pub struct MapEntry {
+    pub id: String,
+    pub act: u8,
+    pub sub: u8,
+    pub map: Map,
 }

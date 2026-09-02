@@ -19,6 +19,12 @@ pub enum Action {
 
     Confirm,
     Quit,
+
+    // Exploration
+    MoveNorth,
+    MoveSouth,
+    MoveEast,
+    MoveWest,
 }
 
 pub fn from_input(input: Input) -> Option<Action> {
@@ -41,6 +47,12 @@ pub fn from_input(input: Input) -> Option<Action> {
 
         KeyCode::Enter | KeyCode::Char(' ') => Action::Confirm,
         KeyCode::Esc | KeyCode::Char('q') => Action::Quit,
+
+        // Exploration
+        KeyCode::Char('w') => Action::MoveNorth,
+        KeyCode::Char('s') => Action::MoveSouth,
+        KeyCode::Char('d') => Action::MoveEast,
+        KeyCode::Char('a') => Action::MoveWest,
 
         _ => return None,
     };

@@ -2,16 +2,17 @@
 // selected.
 use std::io;
 
-use ratatui::DefaultTerminal;
+use ratatui::{DefaultTerminal, layout::Position};
 
 use crate::{
     action::{self, Action},
     creation::PointBuy,
     event,
-    state::GameState,
+    state::{GameState, GameMode},
     story::{
         Story,
         model::{Choice, Message, Passage},
+
     },
     ui,
 };
@@ -152,22 +153,29 @@ impl App {
         }
 
         let available = self.available_choices();
+        let passage_id = match self.state.mode.passage_id() {
+            Some(id) => id,
+            None => {
+                self.running = false;
+                println!("No passage ID in state, ending story.");
+                return;
+            }
+        };
 
         if let Some(&index) = available.get(self.selected_choice) {
-            let passage = self.story.get(&self.state.current_passage_id);
-            let choice = &passage.choices[index];
-            let effects = choice.effects.clone();
-            let next = choice.next.clone();
-
-            self.state.apply_all(&effects);
-            self.goto(&next);
-            return;
-        }
+                let passage: &Passage = self.story.get(&passage_id);
+                let choice = &passage.choices[index];
+                let effects = choice.effects.clone();
+                let next: String = choice.next.clone();
+                self.state.apply_all(&effects);
+                self.goto(&next);
+                return;
+            }
 
         // No choices available
         let next = self
             .story
-            .get(&self.state.current_passage_id)
+            .get(&passage_id)
             .next
             .clone();
 
@@ -194,27 +202,34 @@ impl App {
     }
 
     fn reveal_message_from(&mut self, start: usize) -> bool {
-        let id = self.state.current_passage_id.clone();
-        let passage = self.story.get(&id);
-
-        let found = (start..passage.messages.len())
-            .find(|&index| self.state.passes(&passage.messages[index].when));
-
-        let Some(index) = found else {
-            return false;
-        };
-
-        let effects = passage.messages[index].effects.clone();
-
-        self.message_index = index;
-        self.state.apply_all(&effects);
-
-        true
+        if let Some(id) = self.state.mode.passage_id() {
+            let passage = self.story.get(&id);
+            let found = (start..passage.messages.len())
+                .find(|&index| self.state.passes(&passage.messages[index].when));
+    
+            let Some(index) = found else {
+                return false;
+            };
+    
+            let effects = passage.messages[index].effects.clone();
+    
+            self.message_index = index;
+            self.state.apply_all(&effects);
+    
+            true
+        } else {
+            false
+        }
     }
 
     // Read-only, for the UI
     pub fn passage(&self) -> &Passage {
-        self.story.get(&self.state.current_passage_id)
+        match self.state.mode.passage_id() {
+            Some(id) => self.story.get(&id),
+            None => {
+                panic!("No passage ID in state, but story is still running. This should never happen.");
+            }
+        }
     }
 
     pub fn message(&self) -> Option<&Message> {
@@ -242,5 +257,9 @@ impl App {
 
         (start..passage.messages.len())
             .any(|index| self.state.passes(&passage.messages[index].when))
+    }
+    /// EXPLORATION
+    pub fn enter_map(&mut self, map_id: impl Into<String>, position: Position) {
+        self.state.mode = GameMode::Exploration { map_id: map_id.into(), position }
     }
 }
