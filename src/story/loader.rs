@@ -69,7 +69,7 @@ pub fn embedded_maps() -> Vec<super::model::MapEntry> {
 }
 
 pub fn parse_maps(source: &str) -> Result<Vec<MapEntry>, LoadError> {
-    let mut maps: Vec<MapEntry> = ron::from_str(source)?;
+    let maps: Vec<MapEntry> = ron::from_str(source)?;
 
     Ok(maps)
 }

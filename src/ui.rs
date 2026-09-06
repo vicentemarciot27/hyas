@@ -2,7 +2,8 @@
 // draw() runs many times per input: never mutate anything from here
 
 mod creation;
-mod passage;
+mod narrative;
+mod exploration;
 
 use ratatui::Frame;
 
@@ -14,7 +15,8 @@ use crate::{
 pub fn render(frame: &mut Frame, app: &App) {
     match &app.mode {
         Mode::Creation(point_buy) => creation::render(frame, point_buy),
-        Mode::Story => passage::render(frame, app),
+        Mode::Narrative { passage_id } => narrative::render(frame, app),
+        Mode::Exploration { map_id, position } => exploration::render(frame, app),
     }
 }
 

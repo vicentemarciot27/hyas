@@ -1,40 +1,19 @@
-// basically anything worth saving
-
-use ratatui::{layout::Position};
-
 use std::collections::{HashMap, HashSet};
 
 use crate::story::model::{
-    Attribute, Condition, ConditionalEffects, Effect, Flag, Impression, Passage, Skill,
+    Attribute,
+    Condition,
+    ConditionalEffects,
+    Effect,
+    Flag,
+    Impression,
+    Skill,
 };
-
-
-#[derive(Debug)]
-pub enum GameMode {
-    Narrative {
-        passage_id: String,
-    },
-
-    Exploration {
-        map_id: String,
-        position: Position,
-    }
-}
-
-impl GameMode {
-    pub fn passage_id(&self) -> Option<&str> {
-        match self {
-            GameMode::Narrative { passage_id } => Some(passage_id),
-            GameMode::Exploration { .. } => None,
-        }
-    }
-}
 
 #[derive(Debug)]
 pub struct GameState {
     pub player: PlayerState,
     pub story: StoryState,
-    pub mode: GameMode,
 }
 
 #[derive(Debug, Default)]
@@ -55,28 +34,34 @@ pub struct StoryState {
 
     pub tomas_first_impression: Option<Impression>,
 
-    pub known_actor_names: HashSet<String>,
+    // pub known_actor_names: HashSet<String>,
 }
 
 impl PlayerState {
     pub fn attribute(&self, attribute: Attribute) -> u8 {
-        self.attributes.get(&attribute).copied().unwrap_or(0)
+        self.attributes
+            .get(&attribute)
+            .copied()
+            .unwrap_or(0)
     }
 
     pub fn skill(&self, skill: Skill) -> u8 {
-        self.skills.get(&skill).copied().unwrap_or(0)
+        self.skills
+            .get(&skill)
+            .copied()
+            .unwrap_or(0)
     }
 }
 
 impl GameState {
-    pub fn new(name: impl Into<String>, start: impl Into<String>) -> Self {
+    pub fn new(name: impl Into<String>) -> Self {
         Self {
             player: PlayerState {
                 name: name.into(),
                 ..Default::default()
             },
+
             story: StoryState::default(),
-            mode: GameMode::Narrative {passage_id: start.into()},
         }
     }
 
@@ -90,15 +75,21 @@ impl GameState {
                 self.player.attribute(*attribute) >= *value
             }
 
-            Condition::SkillAtLeast { skill, value } => self.player.skill(*skill) >= *value,
+            Condition::SkillAtLeast { skill, value } => {
+                self.player.skill(*skill) >= *value
+            }
 
-            Condition::Flag(flag) => self.story.flags.contains(flag),
+            Condition::Flag(flag) => {
+                self.story.flags.contains(flag)
+            }
 
             Condition::TomasFirstImpression(impression) => {
                 self.story.tomas_first_impression == Some(*impression)
             }
 
-            Condition::Not(inner) => !self.check(inner),
+            Condition::Not(inner) => {
+                !self.check(inner)
+            }
 
             Condition::Any(conditions) => {
                 conditions.iter().any(|condition| self.check(condition))
@@ -124,61 +115,113 @@ impl GameState {
         }
     }
 
-    pub fn run_conditional_effects(&mut self, blocks: &[ConditionalEffects]) {
+    pub fn run_conditional_effects(
+        &mut self,
+        blocks: &[ConditionalEffects],
+    ) {
         for block in blocks {
             if self.passes(&block.when) {
                 self.apply_all(&block.effects);
             }
         }
     }
-
-    pub fn enter(&mut self, passage: &Passage) {
-        self.mode = GameMode::Narrative { passage_id: passage.id.clone(), } ;
-        self.run_conditional_effects(&passage.on_enter);
-    }
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::story::loader::load_passages;
+
+    use crate::{
+        story::{
+            loader::load_passages,
+            model::Passage,
+        },
+    };
 
     fn after_tomas_turn() -> Passage {
         load_passages("data/passages.ron")
             .expect("passages.ron should parse")
             .into_iter()
-            .find(|passage| passage.id == "act1_002.after_tomas_turn")
+            .find(|passage| {
+                passage.id == "act1_002.after_tomas_turn"
+            })
             .expect("after_tomas_turn should exist")
     }
 
-    fn state_with(impression: Impression, flags: &[Flag]) -> GameState {
-        let mut state = GameState::new("Cadet", "act1_002.tomas_turn");
+    fn state_with(
+        impression: Impression,
+        flags: &[Flag],
+    ) -> GameState {
+        let mut state = GameState::new("Cadet");
+
         state.story.tomas_first_impression = Some(impression);
-        state.story.flags.extend(flags.iter().copied());
+
+        state
+            .story
+            .flags
+            .extend(flags.iter().copied());
+
         state
     }
 
-    /// Tomas Impression transitions are order-dependent.
     #[test]
     fn impression_transitions_do_not_cascade() {
         let passage = after_tomas_turn();
-        let helped = [Flag::CadetHelpedTomasAtIntake];
-        let mocked = [Flag::CadetThrewOneLessBackAtTomas];
+
+        let helped = [
+            Flag::CadetHelpedTomasAtIntake,
+        ];
+
+        let mocked = [
+            Flag::CadetThrewOneLessBackAtTomas,
+        ];
 
         let cases = [
-            (Impression::Blunt, &helped[..], Impression::Teasing),
-            (Impression::Distant, &helped[..], Impression::Blunt),
-            (Impression::Blunt, &mocked[..], Impression::Distant),
-            (Impression::Teasing, &mocked[..], Impression::Blunt),
-            (Impression::Warm, &mocked[..], Impression::Teasing),
+            (
+                Impression::Blunt,
+                &helped[..],
+                Impression::Teasing,
+            ),
+            (
+                Impression::Distant,
+                &helped[..],
+                Impression::Blunt,
+            ),
+            (
+                Impression::Blunt,
+                &mocked[..],
+                Impression::Distant,
+            ),
+            (
+                Impression::Teasing,
+                &mocked[..],
+                Impression::Blunt,
+            ),
+            (
+                Impression::Warm,
+                &mocked[..],
+                Impression::Teasing,
+            ),
+
             // No transition applies.
-            (Impression::Warm, &helped[..], Impression::Warm),
-            (Impression::Distant, &[][..], Impression::Distant),
+            (
+                Impression::Warm,
+                &helped[..],
+                Impression::Warm,
+            ),
+            (
+                Impression::Distant,
+                &[][..],
+                Impression::Distant,
+            ),
         ];
 
         for (before, flags, expected) in cases {
             let mut state = state_with(before, flags);
-            state.enter(&passage);
+
+            state.run_conditional_effects(
+                &passage.on_enter,
+            );
 
             assert_eq!(
                 state.story.tomas_first_impression,
@@ -190,16 +233,22 @@ mod tests {
 
     #[test]
     fn missing_stats_read_as_zero() {
-        let state = GameState::new("Cadet", "act1_002.arrival");
+        let state = GameState::new("Cadet");
 
-        assert!(!state.check(&Condition::AttributeAtLeast {
-            attribute: Attribute::Reasoning,
-            value: 2,
-        }));
+        assert!(!state.check(
+            &Condition::AttributeAtLeast {
+                attribute: Attribute::Reasoning,
+                value: 2,
+            }
+        ));
 
-        assert!(state.check(&Condition::Not(Box::new(Condition::SkillAtLeast {
-            skill: Skill::Empathy,
-            value: 20,
-        }))));
+        assert!(state.check(
+            &Condition::Not(Box::new(
+                Condition::SkillAtLeast {
+                    skill: Skill::Empathy,
+                    value: 20,
+                }
+            ))
+        ));
     }
 }

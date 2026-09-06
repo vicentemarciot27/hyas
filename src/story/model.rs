@@ -216,13 +216,13 @@ pub enum Flag {
 }
 
 //// MAPS
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Clone, Copy, PartialEq, Eq)]
 pub enum Direction {
     East,
     South,
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize,Clone, Copy, PartialEq, Eq)]
 pub enum CoverType {
     Half,
     Full,
@@ -243,4 +243,58 @@ pub struct MapEntry {
     pub act: u8,
     pub sub: u8,
     pub map: Map,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize)]
+pub struct Position {
+    pub x: u16,
+    pub y: u16,
+}
+
+impl MapEntry {
+    pub fn is_valid_movement(&self, from: Position, to: Position) -> bool {
+        let (from_x, from_y) = (from.x, from.y);
+        let (to_x, to_y) = (to.x, to.y);
+
+        // Check if the movement is adjacent (no diagonal movement)
+        let dx = (to_x as i32 - from_x as i32).abs();
+        let dy = (to_y as i32 - from_y as i32).abs();
+
+        // define the edge
+        let edge: (u16, u16, Direction) = if to_x > from_x {
+            // East of from
+            (from_x, from_y, Direction::East)
+        } else if to_x < from_x {
+            // East of to
+            (to_x, to_y, Direction::East)
+        } else if to_y > from_y {
+            // South of from
+            (from_x, from_y, Direction::South)
+        } else {
+            // South of to
+            (to_x, to_y, Direction::South)  
+        };
+
+        if dx + dy != 1 {
+            return false;
+        }
+
+        // Check if the destination is within bounds
+        if to_x >= self.map.width || to_y >= self.map.height {
+            return false;
+        }
+
+        // Check if the destination is blocked
+        if self.map.blocked.contains(&(to_x, to_y)) {
+            return false;
+        }
+
+        // Check if edge contains full cover
+        if self.map.cover.contains(&(edge.0, edge.1, edge.2, CoverType::Full)) {
+            return false;
+        }
+
+        return true;
+
+    }
 }

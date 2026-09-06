@@ -41,4 +41,9 @@ impl Story {
             .find(|passage| passage.act == 1 && passage.location == "start")
             .expect("no starting passage found")
     }
+
+    pub fn get_map(&self, id: &str) -> &model::MapEntry {
+        let index = self.maps_by_id[id];
+        &self.maps[index]
+    }
 }

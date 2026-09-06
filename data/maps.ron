@@ -1,7 +1,10 @@
 [
     (
         act: 1,
-        id: "training_shooting"
+        sub: 0,
+        id: "training_shooting",
+        map: (
+
         width: 30,
         height: 30,
         blocked: [],
@@ -164,17 +167,18 @@
             (29, 29, East, Full),
             (29, 29, South, Full),
         ],
+        ),
     ),
-    (
-        act: 1,
-        id: "training_melee"
-    ),
-    (
-        act: 1,
-        id: "training_stealth"
-    ),
-    (
-        act: 1,
-        id: "camp_night"
-    )
+    // (
+    //     act: 1,
+    //     id: "training_melee",
+    // ),
+    // (
+    //     act: 1,
+    //     id: "training_stealth",
+    // ),
+    // (
+    //     act: 1,
+    //     id: "camp_night",
+    // )
 ]
