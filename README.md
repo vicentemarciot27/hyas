@@ -29,7 +29,7 @@ For example, if a guard's hand is shaking.
 - Perception allows for the Cadet to notice it
 - Medicine tells cadet it is withdrawal.
 - A compassionate Cadet is inclined to offer help, and a cruel one to abuse the a weakness.
-    - Everyone is capable of good and evil, but some people are more inclined for evildoing, going against one's nature requires will
+    - Everyone is capable of good and evil, but some people are more inclined to evildoing, going against one's nature requires will
 
 ## Play
 
