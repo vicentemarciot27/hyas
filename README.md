@@ -2,8 +2,7 @@
 
 A terminal text adventure.
 
-Built with [ratatui](https://ratatui.rs). Story lives in `data/passages.ron`
-and is compiled into the binary.
+Built with [ratatui](https://ratatui.rs).
 
 ## Play
 
