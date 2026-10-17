@@ -6,7 +6,7 @@ Built with [ratatui](https://ratatui.rs).
 
 ## Design
 
-You are free to try what you want. The game is deterministic and choices are written by hand.
+The game is deterministic, with choices and narrative paths hand-written.
 The aim is for it to feel like an LLM is reacting to your choices, but instead it's just the result
 of countless hours of the developer thinking each and every narrative path, with minimal mandatory convergence.
 
