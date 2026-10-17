@@ -4,3 +4,6 @@
 **/__**
 
 .vscode
+
+assets/draft/*
+assets/lore/*
